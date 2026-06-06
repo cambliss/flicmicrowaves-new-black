@@ -1,0 +1,898 @@
+{
+  "whyChoose": {
+    "heading": "Quality & Performance Assured",
+    "subtitle": "Our technologies deliver reliable, high-performance results for complex applications.",
+    "items": [
+      {
+        "title": "Mission Critical Communications",
+        "description": "Engineered RF chains for secure, resilient communication in demanding operating environments."
+      },
+      {
+        "title": "Customised RF Sub-systems",
+        "description": "Tailored subsystem design aligned to your frequency plans, integration constraints, and performance goals."
+      },
+      {
+        "title": "300MHz-300GHz Design, Manufacture & Test",
+        "description": "End-to-end capability across wideband RF and microwave programs from concept through validation."
+      },
+      {
+        "title": "Hybrid Manufacturing Services",
+        "description": "Flexible manufacturing workflows combining precision build, quality checks, and rapid program scaling."
+      }
+    ]
+  },
+  "solutions": {
+    "heading": "Our Solutions",
+    "subtitle": "High-performance RF and microwave systems designed for defense, satellite, telecom, and mission-critical industrial applications.",
+    "items": [
+      {
+        "title": "RF Filters",
+        "description": "Precision bandpass, lowpass, and highpass filters engineered for clean signal paths, low insertion loss, and strong out-of-band rejection across demanding RF environments.",
+        "buttonText": "Learn More",
+        "buttonUrl": "/products"
+      },
+      {
+        "title": "Satellite Amplifiers",
+        "description": "Reliable LNB, BUC, and HPA solutions built for stable uplink and downlink performance in C, Ku, Ka, and X-band satellite communication systems.",
+        "buttonText": "Learn More",
+        "buttonUrl": "/products"
+      },
+      {
+        "title": "Defense Electronics",
+        "description": "Ruggedized microwave assemblies and RF subsystems built to military standards for secure communication, surveillance, and battlefield-ready performance.",
+        "buttonText": "Learn More",
+        "buttonUrl": "/products"
+      }
+    ]
+  },
+  "process": {
+    "heading": "Our Process",
+    "subtitle": "From concept to deployment, we follow a proven methodology that ensures success",
+    "items": [
+      {
+        "title": "Requirement Analysis",
+        "description": "We work closely with you to capture RF specifications, environmental constraints, and integration requirements."
+      },
+      {
+        "title": "Custom Design",
+        "description": "Our engineers use EM simulation tools to design components precisely matched to your frequency and performance targets."
+      },
+      {
+        "title": "Verification & Testing",
+        "description": "Every unit is measured against spec — insertion loss, return loss, VSWR, and environmental stress tested."
+      },
+      {
+        "title": "Delivery & Support",
+        "description": "On-time delivery with full documentation, integration guidance, and long-term technical support included."
+      }
+    ]
+  },
+  "industries": {
+    "heading": "Serving Critical Industries",
+    "subtitle": "Trusted by mission-critical sectors for high-performance RF and microwave components built for reliability, precision, and long-term operational stability.",
+    "image": "home-content-1779779751332-813482854.png",
+    "items": [
+      {
+        "title": "Defence & Aerospace",
+        "description": "Advanced RF assemblies, radar modules, and secure communication components engineered for high-stress, mission-ready environments."
+      },
+      {
+        "title": "Telecommunications",
+        "description": "Filters and amplifiers that strengthen 4G/5G infrastructure, backhaul performance, and network signal quality at scale."
+      },
+      {
+        "title": "Space & Satellite",
+        "description": "Microwave components designed for satellite payloads and ground systems, delivering stable performance across demanding frequency bands."
+      },
+      {
+        "title": "Industrial Systems",
+        "description": "Rugged RF solutions for automation, monitoring, and control platforms used in power, transport, and critical infrastructure networks."
+      }
+    ]
+  },
+  "featuredProducts": {
+    "heading": "Featured Products",
+    "subtitle": "High-performance RF and microwave products engineered for precision, durability, and mission-critical reliability.",
+    "items": [
+      {
+        "title": "5G & Cellular Filters",
+        "description": "Ultra-low loss cavity and ceramic filters optimized for sub-6 GHz and mmWave deployments in dense telecom environments.",
+        "buttonText": "View Details",
+        "buttonUrl": "/filters",
+        "image": "home-content-1779780491784-253113334.png"
+      },
+      {
+        "title": "Satellite Amplifiers",
+        "description": "LNB, BUC, and HPA units designed for stable uplink/downlink operation across Ku, Ka, C, and X-band systems.",
+        "buttonText": "View Details",
+        "buttonUrl": "/satellite-amplifiers",
+        "image": "home-content-1779780491768-291772949.png"
+      },
+      {
+        "title": "Defence RF Subsystems",
+        "description": "Ruggedized transceiver blocks, synthesis modules, and RF assemblies developed to meet strict military standards.",
+        "buttonText": "View Details",
+        "buttonUrl": "/products",
+        "image": "home-content-1779780491799-599379370.png"
+      }
+    ]
+  },
+  "innovation": {
+    "heading": "Driving Innovation",
+    "description": "Our R&D ecosystem combines advanced simulation, precision fabrication, and field-driven engineering to deliver next-generation RF and microwave solutions with measurable performance gains.",
+    "points": [
+      "Simulation-first design using HFSS and CST to optimize insertion loss, selectivity, and thermal behavior before production.",
+      "In-house prototyping and RF tuning workflows that reduce development cycles and improve repeatability across batches.",
+      "Qualification-ready testing aligned with mission and telecom deployment requirements for long-term reliability.",
+      "Co-development support for defense, aerospace, and satellite programs with custom frequency and form-factor targets."
+    ],
+    "buttonText": "View Research",
+    "buttonUrl": "/about",
+    "image": "home-content-1779781578413-992224376.png"
+  },
+  "gallery": {
+    "eyebrow": "Gallery",
+    "heading": "Engineering Gallery",
+    "subtitle": "Explore snapshots from our labs, teams, and mission-critical RF integration work.",
+    "images": []
+  },
+  "innovationPage": {
+    "hero": {
+      "eyebrow": "Innovation Lab",
+      "title": "Research-Led RF Innovation For Strategic Missions",
+      "subtitle": "From concept validation to deployable subsystems, our innovation programs transform mission constraints into reliable RF and microwave outcomes.",
+      "primaryCtaText": "Discuss Innovation Program",
+      "primaryCtaUrl": "/contact",
+      "secondaryCtaText": "Book Technical Session",
+      "secondaryCtaUrl": "/book-appointment"
+    },
+    "focusAreas": [
+      {
+        "title": "Next-Gen RF Architectures",
+        "body": "Evaluating architecture alternatives for better performance margins under contested environments."
+      },
+      {
+        "title": "Thermal And Power Optimization",
+        "body": "Design experiments to improve sustained output and minimize signal degradation."
+      },
+      {
+        "title": "Miniaturization And Packaging",
+        "body": "Compact subsystem designs for space-constrained platforms without compromising reliability."
+      },
+      {
+        "title": "Signal Integrity Engineering",
+        "body": "Simulation-led optimization to improve selectivity, stability, and interference resilience."
+      }
+    ],
+    "labCapabilities": [
+      "Rapid concept prototyping and performance benchmarking",
+      "Design simulation loops with measured validation feedback",
+      "Subsystem reliability trials under environmental stress",
+      "Interface readiness checks for downstream integration"
+    ],
+    "pipeline": [
+      {
+        "step": "01",
+        "title": "Problem Framing",
+        "body": "Translate mission constraints into measurable technical hypotheses."
+      },
+      {
+        "step": "02",
+        "title": "Prototype Iteration",
+        "body": "Build and refine candidate designs using simulation and controlled testing."
+      },
+      {
+        "step": "03",
+        "title": "Validation And Transfer",
+        "body": "Document results and move validated concepts into engineering programs."
+      }
+    ],
+    "metrics": [
+      {
+        "value": "120+",
+        "label": "Innovation Experiments"
+      },
+      {
+        "value": "40+",
+        "label": "Validated Concepts"
+      },
+      {
+        "value": "18",
+        "label": "Active R&D Tracks"
+      },
+      {
+        "value": "24/7",
+        "label": "Lab Readiness"
+      }
+    ],
+    "featuredProjects": [
+      {
+        "title": "Adaptive Filter Topology Study",
+        "problem": "Conventional filtering approaches showed reduced resilience under dynamic interference windows.",
+        "approach": "Evaluated adaptive topology variants with iterative EM simulation and bench verification.",
+        "outcome": "Identified design approach with improved rejection behavior and stable insertion loss envelope."
+      },
+      {
+        "title": "Ruggedized Microwave Module Packaging",
+        "problem": "Subsystem drift was observed during thermal and vibration stress combinations.",
+        "approach": "Ran packaging and material alternatives with stress-profile-driven test loops.",
+        "outcome": "Improved thermal stability and mechanical robustness in qualification simulations."
+      }
+    ],
+    "cta": {
+      "title": "Co-Create Your Next Innovation Program",
+      "description": "Bring your technical challenge to our innovation team and we will define an actionable R&D pathway.",
+      "primaryText": "Start Innovation Discussion",
+      "primaryUrl": "/contact",
+      "secondaryText": "Schedule Discovery Call",
+      "secondaryUrl": "/book-appointment"
+    }
+  },
+  "facilitiesPage": {
+    "hero": {
+      "eyebrow": "Our Facilities",
+      "title": "Advanced Facilities For RF And Microwave Excellence",
+      "subtitle": "From lab design to final integration, our facilities are built to deliver dependable performance for mission-critical programs.",
+      "primaryCtaText": "Book A Technical Visit",
+      "primaryCtaUrl": "/book-appointment",
+      "secondaryCtaText": "Contact Engineering",
+      "secondaryCtaUrl": "/contact"
+    },
+    "intro": {
+      "heading": "Lab, Testing, CAD And Integration",
+      "description": "Our facility ecosystem combines engineering, validation, and integration capabilities to accelerate reliable RF product delivery."
+    },
+    "facilities": [
+      {
+        "id": "rf-lab",
+        "title": "RF And Microwave Lab",
+        "summary": "Design and prototyping for high-frequency subsystems.",
+        "details": "Simulation-led engineering with HFSS/CST workflows for filters, transceivers, and amplification chains from concept to prototype.",
+        "image": "/facilities/facilities-reference.jpeg"
+      },
+      {
+        "id": "test-lab",
+        "title": "Testing And Validation Lab",
+        "summary": "Structured verification for repeatable RF performance.",
+        "details": "Includes RF characterization, insertion-loss profiling, thermal checks, and qualification evidence generation for program acceptance.",
+        "image": "/facilities/facilities-reference.jpeg"
+      },
+      {
+        "id": "cad-center",
+        "title": "CAD Design Center",
+        "summary": "Mechanical and package design for integration readiness.",
+        "details": "Precision CAD workflows focused on manufacturability, thermal management, and stable fitment in mission-constrained platforms.",
+        "image": "/facilities/facilities-reference.jpeg"
+      },
+      {
+        "id": "integration-bay",
+        "title": "Assembly And Integration Facility",
+        "summary": "Controlled build and final subsystem integration.",
+        "details": "Build, alignment, and interface integration checkpoints to ensure consistent output quality before customer deployment.",
+        "image": "/facilities/facilities-reference.jpeg"
+      }
+    ],
+    "cta": {
+      "title": "Need A Facility-Supported RF Program?",
+      "description": "Share your requirement and our engineering team will map the right facility workflow for your project.",
+      "primaryText": "Request Consultation",
+      "primaryUrl": "/contact",
+      "secondaryText": "Schedule Appointment",
+      "secondaryUrl": "/book-appointment"
+    }
+  },
+  "contactPage": {
+    "hero": {
+      "eyebrow": "Contact Us",
+      "title": "Get In Touch With Flic Microwaves",
+      "subtitle": "Share your requirement and our team will respond quickly with the right technical support."
+    },
+    "form": {
+      "title": "Send Us A Message",
+      "subtitle": "Fill in the details below and our team will connect with you.",
+      "submitText": "Send Message",
+      "successMessage": "Thank you. Your message has been sent successfully.",
+      "errorMessage": "Unable to send your message right now. Please try again."
+    },
+    "formFields": [
+      {
+        "key": "firstName",
+        "label": "First Name",
+        "type": "text",
+        "placeholder": "Enter your first name",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "lastName",
+        "label": "Last Name",
+        "type": "text",
+        "placeholder": "Enter your last name",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "email",
+        "label": "Email Address",
+        "type": "email",
+        "placeholder": "your.email@company.com",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "phone",
+        "label": "Phone Number",
+        "type": "tel",
+        "placeholder": "+91 99999 99999",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "company",
+        "label": "Company",
+        "type": "text",
+        "placeholder": "Your company",
+        "required": false,
+        "options": []
+      },
+      {
+        "key": "subject",
+        "label": "Subject",
+        "type": "text",
+        "placeholder": "Inquiry subject",
+        "required": true,
+        "options": []
+      },
+      {
+        "key": "inquiryType",
+        "label": "Inquiry Type",
+        "type": "select",
+        "placeholder": "Select inquiry type",
+        "required": false,
+        "options": [
+          "Product Inquiry",
+          "Technical Support",
+          "Custom Solution",
+          "Partnership"
+        ]
+      },
+      {
+        "key": "message",
+        "label": "Message",
+        "type": "textarea",
+        "placeholder": "Please describe your requirement",
+        "required": true,
+        "options": []
+      }
+    ],
+    "contactInfo": {
+      "emails": [
+        "flicmicrowaves@flicmicrowaves.com"
+      ],
+      "phones": [
+        "+91 40-24595000"
+      ],
+      "addressLines": [
+        "Survey No. 75/2, Balapur(v),hyderabad"
+      ],
+      "hours": [
+        "Monday - Friday: 9:00 AM - 6:00 PM"
+      ],
+      "responseTime": "We typically respond within 2-4 business hours.",
+      "appointmentUrl": "/book-appointment",
+      "quickCallLabel": "Call Now",
+      "quickEmailLabel": "Email Us"
+    },
+    "map": {
+      "title": "Visit Our Team",
+      "subtitle": "Meet us at our office location for technical discussions and project planning.",
+      "locationName": "Flic Microwaves",
+      "address": "Survey No. 75/2, Balapur(v),hyderabad",
+      "directionsUrl": "https://maps.google.com"
+    },
+    "highlights": [
+      {
+        "title": "Headquarters",
+        "body": "Engineering and support teams available for consultations."
+      },
+      {
+        "title": "Visitor Access",
+        "body": "Visits are by appointment for better technical coordination."
+      },
+      {
+        "title": "Fast Response",
+        "body": "Our team prioritizes technical inquiries and project requests."
+      }
+    ]
+  },
+  "homeDarkIndustries": {
+    "eyebrow": "Diverse Industries, One Goal",
+    "title": "Built For Environments Where Failure Is Not An Option",
+    "subtitle": "Our RF and microwave systems support strategic sectors that demand precision, durability, and long-cycle reliability.",
+    "videoUrl": "https://www.youtube.com/watch?v=HHXpnf4b3Kk",
+    "mediaEyebrow": "Design & Manufacturing Solutions",
+    "mediaTitle": "Customised RF, Microwave and mmWave solutions",
+    "mediaHighlight": "mmWave",
+    "mediaDescription": "We deliver world-class, bespoke RF, microwave, and mmWave design services for broad applications. Our contract microelectronic manufacturing services for both microwave and mmWave technologies are second to none.",
+    "mediaButtonText": "Learn More",
+    "mediaButtonUrl": "/solutions",
+    "items": [
+      {
+        "title": "Defence Programs",
+        "description": "Mission-ready RF modules for tactical communication and surveillance workloads.",
+        "stat": "98.7% Stability",
+        "linkText": "Explore Defence Solutions",
+        "linkUrl": "/industries"
+      },
+      {
+        "title": "Satellite Systems",
+        "description": "High-reliability chains for ground and payload communication across critical bands.",
+        "stat": "Ku/Ka/X/C Bands",
+        "linkText": "View Satellite Work",
+        "linkUrl": "/satellite-amplifiers"
+      },
+      {
+        "title": "Telecom Infrastructure",
+        "description": "Performance-focused components for dense network environments and backbone stability.",
+        "stat": "4G/5G Ready",
+        "linkText": "See Telecom Capability",
+        "linkUrl": "/products"
+      },
+      {
+        "title": "Industrial Electronics",
+        "description": "Rugged RF assemblies built for long-life operation in harsh industrial conditions.",
+        "stat": "24/7 Deployment",
+        "linkText": "Explore Applications",
+        "linkUrl": "/industries"
+      }
+    ]
+  },
+  "homeAdvantage": {
+    "eyebrow": "The Flicmicrowaves Advantage",
+    "title": "Why leading engineers choose us",
+    "highlight": "choose us",
+    "description": "With our expert team, cutting-edge technology, high-performance products, and committed customer service, we're the choice for businesses looking to push the boundaries of advanced RF and microwave engineering.",
+    "videoUrl": "https://www.youtube.com/watch?v=HHXpnf4b3Kk",
+    "points": [
+      {
+        "number": "01",
+        "title": "Reliability redefined",
+        "description": "Our products are engineered for performance, resilience, and unmatched stability - critical in high-frequency applications where margins for error are near zero."
+      },
+      {
+        "number": "02",
+        "title": "Custom solutions",
+        "description": "We work closely with clients to develop tailored solutions that meet specific technical requirements and operational challenges across every sector."
+      },
+      {
+        "number": "03",
+        "title": "Agile culture",
+        "description": "In dynamic environments, an agile culture fuels creativity, innovation, and quick adaptation, empowering our customers to outpace rivals and capitalise on opportunities."
+      },
+      {
+        "number": "04",
+        "title": "Continuous innovation",
+        "description": "We constantly refine our processes, technologies, and products to meet the evolving needs of clients in the rapidly advancing field of RF technology."
+      }
+    ]
+  },
+  "homeSuccessStories": {
+    "eyebrow": "Success Stories",
+    "stories": [
+      {
+        "heading": "Real-world engineering successes",
+        "description": "From defence communication upgrades to satellite-linked deployments, our RF and microwave solutions are trusted in high-stakes programs where reliability and precision are essential.",
+        "buttonText": "Read Case Studies",
+        "buttonUrl": "/blogs",
+        "imageUrl": "/facilities/facilities-reference.jpeg",
+        "imageAlt": "Engineering team reviewing RF systems"
+      }
+    ]
+  },
+  "footer": {
+    "description": "Flic Microwaves delivers precision RF and microwave components for defense, aerospace, satellite, and telecom systems where reliability and performance are mission-critical.",
+    "email": "flicmicrowaves@flicmicrowaves.com",
+    "phone": "+91 40-24595000",
+    "address": "Survey No. 75/2, Balapur(v),hyderabad",
+    "backgroundImage": "home-content-1779783528867-410589754.png",
+    "qualityBadges": [
+      "ISO 9001:2015 - Quality Management",
+      "ISO 14001:2015 - Environmental Management"
+    ],
+    "socialLinks": [
+      {
+        "label": "LinkedIn",
+        "url": "#"
+      },
+      {
+        "label": "X",
+        "url": "#"
+      },
+      {
+        "label": "YouTube",
+        "url": "#"
+      }
+    ],
+    "officeLocations": [
+      {
+        "title": "Hyderabad",
+        "lines": [
+          "Survey No. 75/2, Balapur(v)",
+          "Hyderabad, Telangana",
+          "India"
+        ]
+      },
+      {
+        "title": "Leeds",
+        "lines": [
+          "Marina House 3",
+          "Aviator Way, Leeds",
+          "United Kingdom"
+        ]
+      },
+      {
+        "title": "Manchester",
+        "lines": [
+          "Tech Park, Manchester",
+          "United Kingdom"
+        ]
+      },
+      {
+        "title": "USA",
+        "lines": [
+          "700 Marvin Road",
+          "Salisbury, NC",
+          "USA"
+        ]
+      }
+    ],
+    "productsLinks": [
+      {
+        "label": "Tower-top amplifiers",
+        "url": "/products"
+      },
+      {
+        "label": "RF filters",
+        "url": "/filters"
+      },
+      {
+        "label": "Low-noise amplifiers",
+        "url": "/products"
+      },
+      {
+        "label": "Custom combiners",
+        "url": "/products"
+      },
+      {
+        "label": "Satellite amplifiers",
+        "url": "/satellite-amplifiers"
+      }
+    ],
+    "aboutSiteLinks": [
+      {
+        "label": "Disclaimer",
+        "url": "/contact"
+      },
+      {
+        "label": "Standard Supply Terms",
+        "url": "/contact"
+      },
+      {
+        "label": "Conditions",
+        "url": "/contact"
+      }
+    ],
+    "registeredOfficeLabel": "Registered Office",
+    "registeredOfficeAddress": "Survey No. 75/2, Balapur(v), Hyderabad, Telangana, India",
+    "helpText": "Need help? Arrange a call",
+    "helpUrl": "/contact",
+    "creditLine": "Website designed and developed by Flic Microwaves",
+    "solutionsLinks": [
+      {
+        "label": "RF Filters",
+        "url": "/filters"
+      },
+      {
+        "label": "Label: Satellite Amplifiers",
+        "url": "/satellite-amplifiers"
+      },
+      {
+        "label": "Defense Electronics",
+        "url": "/products"
+      },
+      {
+        "label": "Product Catalog",
+        "url": "/products"
+      }
+    ],
+    "companyLinks": [
+      {
+        "label": "About Us",
+        "url": "/about"
+      },
+      {
+        "label": "Contact",
+        "url": "/contact"
+      },
+      {
+        "label": "Book Appointment",
+        "url": "/book-appointment"
+      },
+      {
+        "label": "Careers",
+        "url": "/careers"
+      }
+    ],
+    "bottomLinks": [
+      {
+        "label": "Privacy Policy",
+        "url": "/privacy"
+      },
+      {
+        "label": "Terms of Service",
+        "url": "/terms"
+      },
+      {
+        "label": "Support",
+        "url": "/contact"
+      }
+    ],
+    "copyright": "© 2026 Flic Microwaves. All rights reserved."
+  },
+  "about": {
+    "overview": {
+      "eyebrow": "Who we are",
+      "title": "Engineering RF Advantage",
+      "highlight": "For Mission-Critical Systems",
+      "description": "Flic Microwaves develops high-performance RF and microwave solutions for organizations where every decibel, every millisecond, and every deployment matters.",
+      "bannerImage": "about1.png",
+      "primaryCtaText": "Talk To Our Team",
+      "primaryCtaUrl": "/contact",
+      "secondaryCtaText": "Explore Capabilities",
+      "secondaryCtaUrl": "/solutions",
+      "stats": [
+        {
+          "value": "25+ Years",
+          "label": "RF Engineering"
+        },
+        {
+          "value": "500+",
+          "label": "Programs Supported"
+        },
+        {
+          "value": "50+",
+          "label": "Countries Served"
+        },
+        {
+          "value": "99.2%",
+          "label": "On-Time Delivery rate"
+        }
+      ]
+    },
+    "journey": {
+      "eyebrow": "Corporate Narrative",
+      "title": "Built To Perform Where Failure Is Not An Option",
+      "paragraph1": "Our operating philosophy combines precision design, disciplined validation, and field-led collaboration.",
+      "paragraph2": "Across defence, telecom, and satellite ecosystems, our teams work as technical partners, not vendors.",
+      "image": "home-content-1779861920480-840589407.jpeg",
+      "highlights": [
+        {
+          "title": "Integrated Manufacturing",
+          "description": "Prototype-to-production continuity."
+        },
+        {
+          "title": "Global Delivery Footprint",
+          "description": "Responsive support across regions."
+        }
+      ]
+    },
+    "capabilities": {
+      "eyebrow": "What We Deliver",
+      "title": "Capability Areas",
+      "subtitle": "A unified engineering stack for high-reliability communications, defence electronics, and mission-critical RF systems.",
+      "items": [
+        {
+          "title": "RF And Microwave Design",
+          "body": "Custom RF architectures, filters, couplers, and passive networks engineered for low insertion loss, high selectivity, and stable field performance."
+        },
+        {
+          "title": "High-Power Amplification",
+          "body": "Robust amplifier solutions for demanding operating environments with optimized thermal design, power efficiency, and long service life."
+        },
+        {
+          "title": "Satellite Communication Systems",
+          "body": "Subsystem expertise for uplink and downlink chains supporting ground stations, payload interfaces, and high-availability satcom operations."
+        },
+        {
+          "title": "Defence-Grade Engineering",
+          "body": "Design and validation workflows aligned to mission-critical reliability expectations, including environmental resilience and repeatable quality output."
+        }
+      ]
+    },
+    "operatingModel": {
+      "eyebrow": "How We Execute",
+      "title": "Our Operating Model",
+      "subtitle": "Structured for speed, precision, and accountability from concept through deployment and lifecycle support.",
+      "items": [
+        {
+          "step": "Step 01",
+          "title": "Requirement Discovery",
+          "body": "We begin by understanding mission objectives, operating constraints, environmental conditions, and compliance expectations to define a clear technical baseline."
+        },
+        {
+          "step": "Step 02",
+          "title": "Architecture And Design",
+          "body": "Our engineering team develops optimized RF and microwave architecture with simulation-led design to balance performance, manufacturability, and integration readiness."
+        },
+        {
+          "step": "Step 03",
+          "title": "Prototype And Validation",
+          "body": "Prototypes are built and tested through electrical, RF, and environmental validation to confirm repeatable performance under real operating conditions."
+        },
+        {
+          "step": "Step 04",
+          "title": "Production And Delivery",
+          "body": "Approved designs move into controlled production with documentation, quality checkpoints, and traceability to ensure consistent deployment outcomes."
+        },
+        {
+          "step": "Step 05",
+          "title": "Integration Support",
+          "body": "We support system-level integration with rapid technical response, tuning guidance, and interface-level troubleshooting across partner teams."
+        },
+        {
+          "step": "Step 06",
+          "title": "Lifecycle Assurance",
+          "body": "Post-deployment support includes reliability tracking, improvement feedback loops, and long-term service continuity for mission-critical programs."
+        }
+      ]
+    },
+    "leadership": {
+      "eyebrow": "Leadership",
+      "title": "Leadership Journey Of Flic Microwaves",
+      "subtitle": "Driven by engineering excellence and customer trust, our leadership team combines deep domain expertise with a long-term commitment to mission-critical innovation.",
+      "items": [
+        {
+          "name": "A. K. Sharma",
+          "role": "Managing Director",
+          "bio": "With over two decades of industry leadership, A. K. Sharma has guided Flic Microwaves from a specialized engineering firm into a trusted partner for defence, aerospace, and telecom programs. His focus on quality, accountability, and strategic growth continues to shape the company’s long-term vision."
+        },
+        {
+          "name": "R. Mehta",
+          "role": "Director - Engineering",
+          "bio": "R. Mehta leads core design and development initiatives across RF and microwave systems. He drives simulation-led architecture, design validation, and cross-functional technical execution to ensure each solution meets stringent performance and reliability expectations."
+        },
+        {
+          "name": "S. Iyer",
+          "role": "Head - Operations & Quality",
+          "bio": "S. Iyer oversees manufacturing operations, quality governance, and process excellence across the organization. Her leadership ensures disciplined execution, traceability, and compliance-led delivery from prototype through full-scale production."
+        },
+        {
+          "name": "V. N. Rao",
+          "role": "Head - Program Management",
+          "bio": "V. N. Rao manages strategic customer programs with a focus on timeline control, risk mitigation, and delivery consistency. He works closely with engineering and operations teams to align every milestone with mission objectives."
+        }
+      ]
+    },
+    "missionVision": {
+      "missionTitle": "Our Mission",
+      "missionText": "To design and deliver high-performance RF and microwave solutions that enable secure, reliable, and mission-ready communication for defence, aerospace, satellite, and telecom ecosystems.",
+      "visionTitle": "Our Vision",
+      "visionText": "To be the most trusted global technology partner in advanced RF engineering, recognized for innovation, quality excellence, and long-term customer success.",
+      "valuesTitle": "Our Core Values",
+      "valuesText": "Integrity in every commitment, precision in every design, quality in every build, and accountability across the entire lifecycle from concept to deployment and sustained support."
+    },
+    "timeline": {
+      "eyebrow": "Our Journey",
+      "title": "Timeline And Milestones",
+      "subtitle": "A milestone view of how Flic Microwaves evolved from specialist engineering to strategic partnership.",
+      "items": [
+        {
+          "year": "2001",
+          "title": "Foundation Of Flic Microwaves",
+          "body": "Flic Microwaves was established with a clear vision to build dependable RF and microwave solutions for critical communication systems."
+        },
+        {
+          "year": "2005",
+          "title": "First Major Program Win",
+          "body": "Successfully delivered high-precision RF assemblies for demanding industrial and strategic applications, establishing early customer trust."
+        },
+        {
+          "year": "2009",
+          "title": "Expansion Into Defence Communications",
+          "body": "Expanded engineering capabilities to support defence-grade reliability standards and mission-critical communication infrastructure."
+        },
+        {
+          "year": "2013",
+          "title": "Advanced Test And Validation Upgrade",
+          "body": "Invested in stronger RF testing and validation workflows to ensure repeatable performance under operational stress conditions."
+        },
+        {
+          "year": "2017",
+          "title": "Satellite Solutions Portfolio Growth",
+          "body": "Introduced specialized satellite communication subsystems for uplink and downlink chains across emerging satcom programs."
+        },
+        {
+          "year": "2020",
+          "title": "Global Delivery And Support Scale-Up",
+          "body": "Strengthened international execution with improved program management, documentation discipline, and technical response agility."
+        },
+        {
+          "year": "2023",
+          "title": "Quality Governance Transformation",
+          "body": "Enhanced process control, traceability, and quality assurance systems to improve consistency from prototype to production."
+        },
+        {
+          "year": "2026",
+          "title": "Next-Generation Innovation Roadmap",
+          "body": "Driving the next phase of growth through advanced RF innovation, stronger partnerships, and long-lifecycle support for strategic sectors."
+        }
+      ]
+    },
+    "globalPresence": {
+      "eyebrow": "Global Presence",
+      "title": "Trusted Across Strategic Programs Worldwide",
+      "points": [
+        "Active project delivery across defence, aerospace, telecom, and satellite ecosystems.",
+        "Engineering and program support aligned to regional compliance and documentation expectations.",
+        "Responsive technical collaboration with OEMs, integrators, and government-linked organizations.",
+        "Reliable execution from prototype validation through serial production and sustained support."
+      ],
+      "stats": [
+        {
+          "value": "50+",
+          "label": "Countries Served"
+        },
+        {
+          "value": "500+",
+          "label": "Programs Supported"
+        },
+        {
+          "value": "99.2%",
+          "label": "On-Time Delivery"
+        },
+        {
+          "value": "24/7",
+          "label": "Technical Coordination"
+        }
+      ]
+    },
+    "awardsQuality": {
+      "awardsTitle": "Awards And Recognition",
+      "awards": [
+        "Recognized for Excellence in RF Engineering Delivery by strategic telecom partners.",
+        "Appreciation for Consistent Program Execution in mission-critical electronics projects.",
+        "Industry acknowledgment for innovation-led microwave subsystem development.",
+        "Customer commendation for long-term reliability and responsive technical support."
+      ],
+      "qualityTitle": "Quality Management And Control",
+      "qualityPoints": [
+        "Structured quality checkpoints from design review through final dispatch.",
+        "Traceability-driven documentation across components, assemblies, and test records.",
+        "Environmental and RF validation aligned to operational reliability requirements.",
+        "Continuous improvement workflows supported by feedback and corrective-action loops."
+      ],
+      "certifications": [
+        "ISO 9001:2015",
+        "AS9100 Practices",
+        "RoHS Compliant Processes",
+        "Internal Reliability Validation Standards"
+      ]
+    },
+    "mdMessage": {
+      "title": "Message From Managing Director",
+      "name": "A. K. Sharma",
+      "role": "Managing Director",
+      "message": "At Flic Microwaves, we believe trust is earned through consistent execution, measurable quality, and long-term commitment to customer success. Our teams are focused on building RF and microwave systems that perform reliably in the most demanding environments. As technology evolves rapidly, we continue to invest in engineering depth, process discipline, and innovation that keeps our partners ahead.",
+      "image": ""
+    },
+    "cta": {
+      "eyebrow": "Start A Conversation",
+      "title": "Bring Your Next Program To Life With Flic Microwaves",
+      "description": "We partner with teams that need speed, rigor, and engineering clarity from first requirement to field deployment.",
+      "primaryText": "Contact Us",
+      "primaryUrl": "/contact",
+      "secondaryText": "Schedule a Call",
+      "secondaryUrl": "/book-appointment"
+    }
+  }
+}
