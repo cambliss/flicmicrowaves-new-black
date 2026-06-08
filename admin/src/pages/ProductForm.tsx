@@ -137,9 +137,15 @@ export default function ProductForm() {
     const files = Array.from(e.target.files || []);
     if (files.length === 0) return;
 
-    const maxNew = Math.max(0, 4 - existingImages.length);
-    const selected = files.slice(0, maxNew);
-    setImageFiles(selected);
+    const availableSlots = Math.max(0, 4 - (existingImages.length + imageFiles.length));
+    if (availableSlots <= 0) {
+      setError('You can upload a maximum of 4 product images.');
+      e.target.value = '';
+      return;
+    }
+
+    const selected = files.slice(0, availableSlots);
+    setImageFiles((prev) => [...prev, ...selected]);
 
     Promise.all(
       selected.map(
@@ -150,7 +156,11 @@ export default function ProductForm() {
             reader.readAsDataURL(file);
           })
       )
-    ).then(setImagePreviews);
+    ).then((newPreviews) => {
+      setImagePreviews((prev) => [...prev, ...newPreviews]);
+    });
+
+    e.target.value = '';
   };
 
   const removeExistingImage = (index: number) => {
