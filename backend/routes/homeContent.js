@@ -2846,6 +2846,14 @@ router.post('/gallery/image', auth, upload.single('image'), (req, res) => {
   return res.json({ image: req.file.filename });
 });
 
+router.post('/upload/image', auth, upload.single('image'), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ error: 'Image file is required' });
+  }
+
+  return res.json({ image: req.file.filename });
+});
+
 router.get('/footer', (_req, res) => {
   const content = readContent();
   res.json(content.footer);

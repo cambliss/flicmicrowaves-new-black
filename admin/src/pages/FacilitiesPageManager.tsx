@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import client from '../api/client';
+import client, { UPLOADS_URL } from '../api/client';
 
 type AnyObj = Record<string, any>;
 
@@ -43,8 +43,15 @@ export default function FacilitiesPageManager() {
   const [form, setForm] = useState<AnyObj>({});
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [uploadingIndex, setUploadingIndex] = useState<number | null>(null);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+
+  const resolveImage = (name: string) => {
+    if (!name) return '';
+    if (name.startsWith('http://') || name.startsWith('https://')) return name;
+    return `${UPLOADS_URL}/${name}`;
+  };
 
   const loadSection = async () => {
     setLoading(true);
@@ -70,6 +77,29 @@ export default function FacilitiesPageManager() {
 
   const setSection = (value: any) => {
     setForm(value);
+  };
+
+  const uploadCmsImage = async (index: number, file: File) => {
+    setError('');
+    setUploadingIndex(index);
+    try {
+      const fd = new FormData();
+      fd.append('image', file);
+      const { data } = await client.post('/api/home-content/upload/image', fd);
+      const uploaded = data?.image || '';
+      if (!uploaded) throw new Error('Upload failed');
+
+      setForm((prev: AnyObj) => {
+        const items = Array.isArray(prev) ? [...prev] : [];
+        if (!items[index]) return prev;
+        items[index] = { ...items[index], image: uploaded };
+        return items;
+      });
+    } catch {
+      setError('Failed to upload image');
+    } finally {
+      setUploadingIndex(null);
+    }
   };
 
   const saveSection = async (event: React.FormEvent) => {
@@ -172,7 +202,7 @@ export default function FacilitiesPageManager() {
           {!loading && (
             <form className="card" style={{ display: 'grid', gap: 14 }} onSubmit={saveSection}>
               <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1a1a1a' }}>{sectionTitle(slug)} CMS</h2>
-              {renderSectionEditor(slug, form, setField, setSection)}
+              {renderSectionEditor(slug, form, setField, setSection, uploadCmsImage, resolveImage, uploadingIndex)}
               <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                 <button type="submit" className="btn btn-primary" disabled={saving}>
                   {saving ? 'Saving...' : `Save ${sectionTitle(slug)}`}
@@ -193,7 +223,10 @@ function renderSectionEditor(
   slug: string,
   form: AnyObj,
   setField: (key: string, value: any) => void,
-  setSection: (value: any) => void
+  setSection: (value: any) => void,
+  uploadCmsImage: (index: number, file: File) => Promise<void>,
+  resolveImage: (name: string) => string,
+  uploadingIndex: number | null
 ) {
   if (slug === 'hero') {
     return (
@@ -220,7 +253,7 @@ function renderSectionEditor(
 
   if (slug === 'facilities') {
     const items = Array.isArray(form) ? form : [emptyFacility(), emptyFacility(), emptyFacility(), emptyFacility()];
-    return renderFacilitiesEditor(items, (next) => setSection(next));
+    return renderFacilitiesEditor(items, (next) => setSection(next), uploadCmsImage, resolveImage, uploadingIndex);
   }
 
   if (slug === 'cta') {
@@ -257,7 +290,13 @@ function simpleText(label: string, value: string, onChange: (next: string) => vo
   );
 }
 
-function renderFacilitiesEditor(items: AnyObj[], setItems: (next: AnyObj[]) => void) {
+function renderFacilitiesEditor(
+  items: AnyObj[],
+  setItems: (next: AnyObj[]) => void,
+  uploadCmsImage: (index: number, file: File) => Promise<void>,
+  resolveImage: (name: string) => string,
+  uploadingIndex: number | null
+) {
   return (
     <div style={{ display: 'grid', gap: 10 }}>
       <h3 style={{ fontSize: 16, fontWeight: 700, color: '#1f2937' }}>Facilities Cards</h3>
@@ -314,6 +353,24 @@ function renderFacilitiesEditor(items: AnyObj[], setItems: (next: AnyObj[]) => v
             }}
             placeholder="image URL or /path"
           />
+          {!!item?.image && (
+            <img
+              src={resolveImage(item.image)}
+              alt={`Facility ${index + 1}`}
+              style={{ width: '100%', maxWidth: 360, height: 160, objectFit: 'cover', borderRadius: 8, border: '1px solid #e5e7eb' }}
+            />
+          )}
+          <input
+            type="file"
+            accept="image/jpeg,image/png,image/gif,image/webp"
+            onChange={async (event) => {
+              const file = event.target.files?.[0];
+              if (!file) return;
+              await uploadCmsImage(index, file);
+              event.target.value = '';
+            }}
+          />
+          {uploadingIndex === index && <p style={{ fontSize: 12, color: '#6b7280' }}>Uploading image...</p>}
           <button
             type="button"
             className="btn btn-danger"

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import client from '../api/client';
+import client, { UPLOADS_URL } from '../api/client';
 
 interface SuccessStoryItem {
   heading: string;
@@ -35,6 +35,7 @@ export default function HomeSuccessStoriesManager() {
   const [saved, setSaved] = useState<HomeSuccessStoriesContent>(emptyContent);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [uploadingIndex, setUploadingIndex] = useState<number | null>(null);
   const [error, setError] = useState('');
 
   const navigate = useNavigate();
@@ -133,6 +134,29 @@ export default function HomeSuccessStoriesManager() {
     });
   };
 
+  const resolveImage = (name: string) => {
+    if (!name) return '';
+    if (name.startsWith('http://') || name.startsWith('https://')) return name;
+    return `${UPLOADS_URL}/${name}`;
+  };
+
+  const uploadStoryImage = async (index: number, file: File) => {
+    setError('');
+    setUploadingIndex(index);
+    try {
+      const fd = new FormData();
+      fd.append('image', file);
+      const { data } = await client.post('/api/home-content/upload/image', fd);
+      const uploaded = data?.image || '';
+      if (!uploaded) throw new Error('Upload failed');
+      handleStoryChange(index, 'imageUrl', uploaded);
+    } catch {
+      setError('Failed to upload image');
+    } finally {
+      setUploadingIndex(null);
+    }
+  };
+
   const addStory = () => {
     setForm((prev) => ({
       ...prev,
@@ -222,6 +246,24 @@ export default function HomeSuccessStoriesManager() {
                     onChange={(e) => handleStoryChange(index, 'imageUrl', e.target.value)}
                     placeholder="/facilities/facilities-reference.jpeg"
                   />
+                  {!!story.imageUrl && (
+                    <img
+                      src={resolveImage(story.imageUrl)}
+                      alt={story.imageAlt || `Story ${index + 1}`}
+                      style={{ width: '100%', maxWidth: 360, height: 160, objectFit: 'cover', borderRadius: 8, border: '1px solid #e5e7eb' }}
+                    />
+                  )}
+                  <input
+                    type="file"
+                    accept="image/jpeg,image/png,image/gif,image/webp"
+                    onChange={async (event) => {
+                      const file = event.target.files?.[0];
+                      if (!file) return;
+                      await uploadStoryImage(index, file);
+                      event.target.value = '';
+                    }}
+                  />
+                  {uploadingIndex === index && <p style={{ fontSize: 12, color: '#6b7280' }}>Uploading image...</p>}
 
                   <label>Image Alt Text</label>
                   <input

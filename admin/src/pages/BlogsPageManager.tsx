@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import client from '../api/client';
+import client, { UPLOADS_URL } from '../api/client';
 
 type AnyObj = Record<string, any>;
 
@@ -49,6 +49,19 @@ export default function BlogsPageManager() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+
+  const resolveImage = (name: string) => {
+    if (!name) return '';
+    if (name.startsWith('http://') || name.startsWith('https://')) return name;
+    return `${UPLOADS_URL}/${name}`;
+  };
+
+  const uploadCmsImage = async (file: File) => {
+    const fd = new FormData();
+    fd.append('image', file);
+    const { data } = await client.post('/api/home-content/upload/image', fd);
+    return data?.image || '';
+  };
 
   const loadSection = async () => {
     setLoading(true);
@@ -176,7 +189,7 @@ export default function BlogsPageManager() {
           {!loading && (
             <form className="card" style={{ display: 'grid', gap: 14 }} onSubmit={saveSection}>
               <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1a1a1a' }}>{sectionTitle(slug)} CMS</h2>
-              {renderSectionEditor(slug, form, setField, setSection)}
+              {renderSectionEditor(slug, form, setField, setSection, uploadCmsImage, resolveImage, setError)}
               <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                 <button type="submit" className="btn btn-primary" disabled={saving}>
                   {saving ? 'Saving...' : `Save ${sectionTitle(slug)}`}
@@ -197,7 +210,10 @@ function renderSectionEditor(
   slug: string,
   form: AnyObj,
   setField: (key: string, value: any) => void,
-  setSection: (value: any) => void
+  setSection: (value: any) => void,
+  uploadCmsImage: (file: File) => Promise<string>,
+  resolveImage: (name: string) => string,
+  setError: (message: string) => void
 ) {
   if (slug === 'hero') {
     return (
@@ -210,7 +226,15 @@ function renderSectionEditor(
   }
 
   if (slug === 'featured') {
-    return renderPostEditor('Featured Post', form || emptyPost(), (next) => setSection(next), false);
+    return renderPostEditor(
+      'Featured Post',
+      form || emptyPost(),
+      (next) => setSection(next),
+      false,
+      uploadCmsImage,
+      resolveImage,
+      setError
+    );
   }
 
   if (slug === 'categories') {
@@ -220,7 +244,7 @@ function renderSectionEditor(
 
   if (slug === 'posts') {
     const items = Array.isArray(form) ? form : [emptyPost(), emptyPost()];
-    return renderPostsEditor('Posts', items, (next) => setSection(next));
+    return renderPostsEditor('Posts', items, (next) => setSection(next), uploadCmsImage, resolveImage, setError);
   }
 
   if (slug === 'newsletter') {
@@ -270,7 +294,15 @@ function simpleText(label: string, value: string, onChange: (next: string) => vo
   );
 }
 
-function renderPostEditor(title: string, item: AnyObj, setItem: (next: AnyObj) => void, withHeading = true) {
+function renderPostEditor(
+  title: string,
+  item: AnyObj,
+  setItem: (next: AnyObj) => void,
+  withHeading = true,
+  uploadCmsImage?: (file: File) => Promise<string>,
+  resolveImage?: (name: string) => string,
+  setError?: (message: string) => void
+) {
   const contentValue = Array.isArray(item?.content)
     ? item.content.join('\n')
     : typeof item?.content === 'string'
@@ -292,6 +324,27 @@ function renderPostEditor(title: string, item: AnyObj, setItem: (next: AnyObj) =
         <input type="text" value={item?.url || ''} onChange={(e) => setItem({ ...item, url: e.target.value })} placeholder="url" />
       </div>
       <input type="text" value={item?.image || ''} onChange={(e) => setItem({ ...item, image: e.target.value })} placeholder="image (example: /blogs/reference-blog.jpeg)" />
+      {!!item?.image && !!resolveImage && (
+        <img src={resolveImage(item.image)} alt={item?.title || 'Blog preview'} style={{ width: '100%', maxWidth: 360, height: 160, objectFit: 'cover', borderRadius: 8, border: '1px solid #e5e7eb' }} />
+      )}
+      {!!uploadCmsImage && (
+        <input
+          type="file"
+          accept="image/jpeg,image/png,image/gif,image/webp"
+          onChange={async (event) => {
+            const file = event.target.files?.[0];
+            if (!file) return;
+            try {
+              const uploaded = await uploadCmsImage(file);
+              if (uploaded) setItem({ ...item, image: uploaded });
+            } catch {
+              setError?.('Failed to upload image');
+            } finally {
+              event.target.value = '';
+            }
+          }}
+        />
+      )}
       <textarea
         rows={5}
         value={contentValue}
@@ -308,17 +361,32 @@ function renderPostEditor(title: string, item: AnyObj, setItem: (next: AnyObj) =
   );
 }
 
-function renderPostsEditor(title: string, items: AnyObj[], setItems: (next: AnyObj[]) => void) {
+function renderPostsEditor(
+  title: string,
+  items: AnyObj[],
+  setItems: (next: AnyObj[]) => void,
+  uploadCmsImage: (file: File) => Promise<string>,
+  resolveImage: (name: string) => string,
+  setError: (message: string) => void
+) {
   return (
     <div style={{ display: 'grid', gap: 10 }}>
       <h3 style={{ fontSize: 16, fontWeight: 700, color: '#1f2937' }}>{title}</h3>
       {items.map((item, index) => (
         <div key={`${title}-${index}`} style={{ border: '1px solid #e5e7eb', borderRadius: 10, padding: 12, display: 'grid', gap: 8 }}>
-          {renderPostEditor('Post', item, (next) => {
-            const updated = [...items];
-            updated[index] = next;
-            setItems(updated);
-          })}
+          {renderPostEditor(
+            'Post',
+            item,
+            (next) => {
+              const updated = [...items];
+              updated[index] = next;
+              setItems(updated);
+            },
+            true,
+            uploadCmsImage,
+            resolveImage,
+            setError
+          )}
           <button
             type="button"
             className="btn btn-danger"
