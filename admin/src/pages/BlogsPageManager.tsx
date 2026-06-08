@@ -325,7 +325,17 @@ function renderPostEditor(
       </div>
       <input type="text" value={item?.image || ''} onChange={(e) => setItem({ ...item, image: e.target.value })} placeholder="image (example: /blogs/reference-blog.jpeg)" />
       {!!item?.image && !!resolveImage && (
-        <img src={resolveImage(item.image)} alt={item?.title || 'Blog preview'} style={{ width: '100%', maxWidth: 360, height: 160, objectFit: 'cover', borderRadius: 8, border: '1px solid #e5e7eb' }} />
+        <>
+          <img src={resolveImage(item.image)} alt={item?.title || 'Blog preview'} style={{ width: '100%', maxWidth: 360, height: 160, objectFit: 'cover', borderRadius: 8, border: '1px solid #e5e7eb' }} />
+          <button
+            type="button"
+            className="btn btn-outline"
+            style={{ width: 'fit-content', padding: '6px 12px', fontSize: 12 }}
+            onClick={() => setItem({ ...item, image: '' })}
+          >
+            Remove Image
+          </button>
+        </>
       )}
       {!!uploadCmsImage && (
         <input

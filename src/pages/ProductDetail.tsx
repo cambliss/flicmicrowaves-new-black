@@ -78,97 +78,108 @@ const ProductDetail = () => {
 
           {!loading && !error && product && (
             <div className="space-y-8">
-              <div className="bg-white p-8 rounded-2xl border border-goldenrod/20 shadow-sm">
-                <div className="text-center mb-8">
-                  <p className="inline-flex items-center px-3 py-1 rounded-full bg-goldenrod/10 text-goldenrod text-sm font-semibold mb-4">
-                    {product.category}
-                  </p>
-                  <h2 className="text-4xl font-bold text-black mb-4">{product.name}</h2>
-                  {product.price && <p className="text-2xl font-bold text-goldenrod">{product.price}</p>}
-                </div>
+              <div className="bg-white p-6 md:p-8 rounded-2xl border border-goldenrod/20 shadow-sm">
+                <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-start">
+                  <div>
+                    {imageUrls.length > 0 && (
+                      <div className="space-y-4">
+                        <div className="relative w-full aspect-[4/3] bg-gradient-to-br from-goldenrod/10 via-white to-goldenrod/5 rounded-2xl overflow-hidden border border-goldenrod/25 shadow-[0_20px_45px_rgba(184,134,11,0.12)]">
+                          <img
+                            src={imageUrls[activeImageIndex]}
+                            alt={`${product.name} ${activeImageIndex + 1}`}
+                            className="w-full h-full object-contain p-4 md:p-6"
+                          />
+                          {imageUrls.length > 1 && (
+                            <>
+                              <button
+                                type="button"
+                                onClick={() => setActiveImageIndex((prev) => (prev - 1 + imageUrls.length) % imageUrls.length)}
+                                className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/55 text-white rounded-full p-2 hover:bg-black/70 transition-colors"
+                                aria-label="Previous image"
+                              >
+                                <ChevronLeft className="w-5 h-5" />
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => setActiveImageIndex((prev) => (prev + 1) % imageUrls.length)}
+                                className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/55 text-white rounded-full p-2 hover:bg-black/70 transition-colors"
+                                aria-label="Next image"
+                              >
+                                <ChevronRight className="w-5 h-5" />
+                              </button>
+                            </>
+                          )}
+                        </div>
 
-                {imageUrls.length > 0 && (
-                  <div className="mb-8">
-                    <div className="relative w-full h-96 bg-goldenrod/5 rounded-2xl overflow-hidden border border-goldenrod/20">
-                      <img
-                        src={imageUrls[activeImageIndex]}
-                        alt={`${product.name} ${activeImageIndex + 1}`}
-                        className="w-full h-full object-cover"
-                      />
-                      {imageUrls.length > 1 && (
-                        <>
-                          <button
-                            type="button"
-                            onClick={() => setActiveImageIndex((prev) => (prev - 1 + imageUrls.length) % imageUrls.length)}
-                            className="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 text-white rounded-full p-2 hover:bg-black/60 transition-colors"
-                            aria-label="Previous image"
-                          >
-                            <ChevronLeft className="w-5 h-5" />
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => setActiveImageIndex((prev) => (prev + 1) % imageUrls.length)}
-                            className="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 text-white rounded-full p-2 hover:bg-black/60 transition-colors"
-                            aria-label="Next image"
-                          >
-                            <ChevronRight className="w-5 h-5" />
-                          </button>
-                        </>
-                      )}
-                    </div>
-
-                    {imageUrls.length > 1 && (
-                      <div className="mt-4 grid grid-cols-4 sm:grid-cols-6 gap-3">
-                        {imageUrls.map((url, index) => (
-                          <button
-                            key={url}
-                            type="button"
-                            onClick={() => setActiveImageIndex(index)}
-                            className={`rounded-lg overflow-hidden border-2 transition-all ${
-                              index === activeImageIndex
-                                ? 'border-goldenrod'
-                                : 'border-goldenrod/20 hover:border-goldenrod/50'
-                            }`}
-                          >
-                            <img
-                              src={url}
-                              alt={`${product.name} thumbnail ${index + 1}`}
-                              className="w-full h-16 object-cover"
-                            />
-                          </button>
-                        ))}
+                        {imageUrls.length > 1 && (
+                          <div className="flex flex-wrap items-center justify-center gap-3">
+                            {imageUrls.map((url, index) => (
+                              <button
+                                key={`${url}-${index}`}
+                                type="button"
+                                onClick={() => setActiveImageIndex(index)}
+                                className={`w-20 h-20 rounded-xl overflow-hidden border-2 transition-all bg-white ${
+                                  index === activeImageIndex
+                                    ? 'border-goldenrod shadow-[0_0_0_2px_rgba(184,134,11,0.18)]'
+                                    : 'border-goldenrod/20 hover:border-goldenrod/50'
+                                }`}
+                              >
+                                <img
+                                  src={url}
+                                  alt={`${product.name} thumbnail ${index + 1}`}
+                                  className="w-full h-full object-cover"
+                                />
+                              </button>
+                            ))}
+                          </div>
+                        )}
                       </div>
                     )}
                   </div>
-                )}
 
-                {product.description && (
-                  <div className="max-w-4xl mx-auto text-center mb-8">
-                    <p className="text-lg text-black/80 leading-relaxed font-opensans">{product.description}</p>
+                  <div className="text-left">
+                    <p className="inline-flex items-center px-3 py-1 rounded-full bg-goldenrod/10 text-goldenrod text-xs font-semibold mb-4 uppercase tracking-[0.2em]">
+                      {product.category}
+                    </p>
+                    <h2 className="text-3xl md:text-4xl font-bold text-black leading-tight mb-4">{product.name}</h2>
+                    {product.price && <p className="text-2xl font-bold text-goldenrod mb-4">{product.price}</p>}
+
+                    {product.description && (
+                      <p className="text-base md:text-lg text-black/75 leading-relaxed font-opensans mb-8">
+                        {product.description}
+                      </p>
+                    )}
+
+                    <div className="flex flex-col sm:flex-row gap-4 sm:items-center">
+                      <button className="border-2 border-goldenrod text-goldenrod px-8 py-3 rounded-lg font-semibold hover:bg-goldenrod hover:text-white transition-all duration-300 flex items-center justify-center gap-2">
+                        <Mail className="w-5 h-5" /> Request Quote
+                      </button>
+                      <button className="bg-goldenrod text-white px-8 py-3 rounded-lg font-semibold hover:bg-goldenrod/90 transition-all duration-300 flex items-center justify-center gap-2">
+                        <Phone className="w-5 h-5" /> Contact Sales
+                      </button>
+                    </div>
+
+                    {product.datasheet && (
+                      <div className="mt-5">
+                        <a
+                          href={`${UPLOADS_BASE}/${product.datasheet}`}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-goldenrod underline text-sm font-opensans"
+                        >
+                          Download Datasheet (PDF)
+                        </a>
+                      </div>
+                    )}
                   </div>
-                )}
-
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <button className="border-2 border-goldenrod text-goldenrod px-8 py-3 rounded-lg font-semibold hover:bg-goldenrod hover:text-white transition-all duration-300 flex items-center justify-center gap-2">
-                    <Mail className="w-5 h-5" /> Request Quote
-                  </button>
-                  <button className="bg-goldenrod text-white px-8 py-3 rounded-lg font-semibold hover:bg-goldenrod/90 transition-all duration-300 flex items-center justify-center gap-2">
-                    <Phone className="w-5 h-5" /> Contact Sales
-                  </button>
                 </div>
 
-                {product.datasheet && (
-                  <div className="text-center mt-4">
-                    <a
-                      href={`${UPLOADS_BASE}/${product.datasheet}`}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-goldenrod underline text-sm font-opensans"
-                    >
-                      Download Datasheet (PDF)
-                    </a>
-                  </div>
-                )}
+                <div className="mt-8 border-t border-goldenrod/20 pt-6">
+                  <p className="text-sm uppercase tracking-[0.18em] text-goldenrod/80 font-semibold mb-2">Product Summary</p>
+                  <p className="text-black/70 font-opensans leading-relaxed">
+                    Review complete technical details, feature highlights, and application-specific suitability below.
+                  </p>
+                </div>
               </div>
 
               {product.features.length > 0 && (

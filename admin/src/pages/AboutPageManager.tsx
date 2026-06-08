@@ -255,7 +255,7 @@ export default function AboutPageManager() {
           {!loading && (
             <form className="card" style={{ display: 'grid', gap: 14 }} onSubmit={saveSection}>
               <h2 style={{ fontSize: 18, fontWeight: 700, color: '#1a1a1a' }}>{sectionTitle(slug)} CMS</h2>
-              {renderSectionEditor(slug, form, setField, previewImage, onUploadChange, fileInputRef)}
+              {renderSectionEditor(slug, form, setField, previewImage, setPreviewImage, onUploadChange, fileInputRef)}
               <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                 <button type="submit" className="btn btn-primary" disabled={saving}>
                   {saving ? 'Saving...' : `Save ${sectionTitle(slug)}`}
@@ -294,6 +294,7 @@ function renderSectionEditor(
   form: AnyObj,
   setField: (key: string, value: any) => void,
   previewImage: string,
+  setPreviewImage: (value: string) => void,
   onUploadChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
   fileInputRef: React.RefObject<HTMLInputElement>
 ) {
@@ -315,8 +316,22 @@ function renderSectionEditor(
           <p style={{ fontSize: 12, color: '#8b6d2e' }}>Upload separate About Us hero banner image here, then click Save Overview.</p>
           <input ref={fileInputRef} type="file" accept="image/jpeg,image/png,image/gif,image/webp" onChange={onUploadChange} />
           {!!previewImage && (
-            <div style={{ border: '1px solid #e5e7eb', borderRadius: 8, padding: 8, maxWidth: 500, background: '#fff' }}>
-              <img src={previewImage} alt="About banner preview" style={{ width: '100%', height: 220, objectFit: 'cover', borderRadius: 6 }} />
+            <div style={{ display: 'grid', gap: 8 }}>
+              <div style={{ border: '1px solid #e5e7eb', borderRadius: 8, padding: 8, maxWidth: 500, background: '#fff' }}>
+                <img src={previewImage} alt="About banner preview" style={{ width: '100%', height: 220, objectFit: 'cover', borderRadius: 6 }} />
+              </div>
+              <button
+                type="button"
+                className="btn btn-outline"
+                style={{ width: 'fit-content', padding: '6px 12px', fontSize: 12 }}
+                onClick={() => {
+                  setField('bannerImage', '');
+                  setPreviewImage('');
+                  if (fileInputRef.current) fileInputRef.current.value = '';
+                }}
+              >
+                Remove Image
+              </button>
             </div>
           )}
         </div>
@@ -348,8 +363,22 @@ function renderSectionEditor(
         <label>Journey Image</label>
         <input ref={fileInputRef} type="file" accept="image/jpeg,image/png,image/gif,image/webp" onChange={onUploadChange} />
         {!!previewImage && (
-          <div style={{ border: '1px solid #e5e7eb', borderRadius: 8, padding: 8, maxWidth: 460 }}>
-            <img src={previewImage} alt="Journey preview" style={{ width: '100%', height: 240, objectFit: 'cover', borderRadius: 6 }} />
+          <div style={{ display: 'grid', gap: 8 }}>
+            <div style={{ border: '1px solid #e5e7eb', borderRadius: 8, padding: 8, maxWidth: 460 }}>
+              <img src={previewImage} alt="Journey preview" style={{ width: '100%', height: 240, objectFit: 'cover', borderRadius: 6 }} />
+            </div>
+            <button
+              type="button"
+              className="btn btn-outline"
+              style={{ width: 'fit-content', padding: '6px 12px', fontSize: 12 }}
+              onClick={() => {
+                setField('image', '');
+                setPreviewImage('');
+                if (fileInputRef.current) fileInputRef.current.value = '';
+              }}
+            >
+              Remove Image
+            </button>
           </div>
         )}
 
@@ -465,8 +494,22 @@ function renderSectionEditor(
         <label>MD Photo</label>
         <input ref={fileInputRef} type="file" accept="image/jpeg,image/png,image/gif,image/webp" onChange={onUploadChange} />
         {!!previewImage && (
-          <div style={{ border: '1px solid #e5e7eb', borderRadius: 8, padding: 8, maxWidth: 300 }}>
-            <img src={previewImage} alt="MD preview" style={{ width: '100%', height: 320, objectFit: 'cover', borderRadius: 6 }} />
+          <div style={{ display: 'grid', gap: 8 }}>
+            <div style={{ border: '1px solid #e5e7eb', borderRadius: 8, padding: 8, maxWidth: 300 }}>
+              <img src={previewImage} alt="MD preview" style={{ width: '100%', height: 320, objectFit: 'cover', borderRadius: 6 }} />
+            </div>
+            <button
+              type="button"
+              className="btn btn-outline"
+              style={{ width: 'fit-content', padding: '6px 12px', fontSize: 12 }}
+              onClick={() => {
+                setField('image', '');
+                setPreviewImage('');
+                if (fileInputRef.current) fileInputRef.current.value = '';
+              }}
+            >
+              Remove Image
+            </button>
           </div>
         )}
       </>

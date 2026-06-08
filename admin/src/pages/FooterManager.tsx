@@ -227,11 +227,13 @@ export default function FooterManager() {
   };
 
   const uploadBackgroundIfNeeded = async () => {
-    if (!backgroundFile) return;
+    if (!backgroundFile) return null;
     const payload = new FormData();
     payload.append('image', backgroundFile);
     const { data } = await client.post('/api/home-content/footer/background', payload);
-    setForm((prev) => ({ ...prev, backgroundImage: data.backgroundImage || prev.backgroundImage }));
+    const uploaded = data.backgroundImage || '';
+    setForm((prev) => ({ ...prev, backgroundImage: uploaded || prev.backgroundImage }));
+    return uploaded || null;
   };
 
   const handleSave = async (event: React.FormEvent) => {
@@ -240,12 +242,13 @@ export default function FooterManager() {
 
     setSaving(true);
     try {
-      await uploadBackgroundIfNeeded();
+      const uploadedImage = await uploadBackgroundIfNeeded();
       await client.put('/api/home-content/footer', {
         description: form.description.trim(),
         email: form.email.trim(),
         phone: form.phone.trim(),
         address: form.address.trim(),
+        backgroundImage: uploadedImage ?? form.backgroundImage ?? '',
         qualityBadges: normalizeStringList(form.qualityBadges),
         socialLinks: normalizeLinks(form.socialLinks),
         officeLocations: normalizeOfficeLocations(form.officeLocations),
@@ -449,8 +452,23 @@ export default function FooterManager() {
           />
 
           {!!preview && (
-            <div style={{ border: '1px solid #e5e7eb', borderRadius: 8, padding: 8, maxWidth: 440 }}>
-              <img src={preview} alt="Footer background" style={{ width: '100%', height: 200, objectFit: 'cover', borderRadius: 6 }} />
+            <div style={{ display: 'grid', gap: 8 }}>
+              <div style={{ border: '1px solid #e5e7eb', borderRadius: 8, padding: 8, maxWidth: 440 }}>
+                <img src={preview} alt="Footer background" style={{ width: '100%', height: 200, objectFit: 'cover', borderRadius: 6 }} />
+              </div>
+              <button
+                type="button"
+                className="btn btn-outline"
+                style={{ width: 'fit-content', padding: '6px 12px', fontSize: 12 }}
+                onClick={() => {
+                  setBackgroundFile(null);
+                  setPreview('');
+                  setForm((prev) => ({ ...prev, backgroundImage: '' }));
+                  if (inputRef.current) inputRef.current.value = '';
+                }}
+              >
+                Remove Image
+              </button>
             </div>
           )}
 

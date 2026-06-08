@@ -106,11 +106,13 @@ export default function InnovationManager() {
   };
 
   const uploadImageIfNeeded = async () => {
-    if (!imageFile) return;
+    if (!imageFile) return null;
     const form = new FormData();
     form.append('image', imageFile);
     const { data } = await client.post('/api/home-content/innovation/image', form);
-    setSaved((prev) => ({ ...prev, image: data.image || prev.image }));
+    const uploaded = data.image || '';
+    setSaved((prev) => ({ ...prev, image: uploaded || prev.image }));
+    return uploaded || null;
   };
 
   const handleSave = async (event: React.FormEvent) => {
@@ -126,13 +128,14 @@ export default function InnovationManager() {
 
     setSaving(true);
     try {
-      await uploadImageIfNeeded();
+      const uploadedImage = await uploadImageIfNeeded();
       await client.put('/api/home-content/innovation', {
         heading: heading.trim(),
         description: description.trim(),
         points: cleanedPoints,
         buttonText: buttonText.trim() || 'View Research',
         buttonUrl: buttonUrl.trim() || '#',
+        image: uploadedImage ?? saved.image ?? '',
       });
       setImageFile(null);
       if (imageInputRef.current) imageInputRef.current.value = '';
@@ -261,8 +264,23 @@ export default function InnovationManager() {
             />
 
             {preview && (
-              <div style={{ border: '1px solid #e5e7eb', borderRadius: 10, padding: 8, width: '100%', maxWidth: 440 }}>
-                <img src={preview} alt="Innovation preview" style={{ width: '100%', height: 220, objectFit: 'cover', borderRadius: 8 }} />
+              <div style={{ display: 'grid', gap: 8 }}>
+                <div style={{ border: '1px solid #e5e7eb', borderRadius: 10, padding: 8, width: '100%', maxWidth: 440 }}>
+                  <img src={preview} alt="Innovation preview" style={{ width: '100%', height: 220, objectFit: 'cover', borderRadius: 8 }} />
+                </div>
+                <button
+                  type="button"
+                  className="btn btn-outline"
+                  style={{ width: 'fit-content', padding: '6px 12px', fontSize: 12 }}
+                  onClick={() => {
+                    setSaved((prev) => ({ ...prev, image: '' }));
+                    setImageFile(null);
+                    setPreview('');
+                    if (imageInputRef.current) imageInputRef.current.value = '';
+                  }}
+                >
+                  Remove Image
+                </button>
               </div>
             )}
 

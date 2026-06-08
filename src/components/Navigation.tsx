@@ -104,7 +104,7 @@ const Navigation = () => {
               {/* Dropdown Menu */}
               {isProductsOpen && (
                 <div 
-                  className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-[1200px] bg-black/95 backdrop-blur-2xl shadow-2xl border border-white/20 p-12 z-[10000] max-w-[95vw]"
+                  className="fixed top-[6.9rem] left-1/2 -translate-x-1/2 w-[min(1200px,95vw)] bg-black/95 backdrop-blur-2xl shadow-2xl border border-white/20 p-8 xl:p-12 z-[10000]"
                   onMouseEnter={() => setIsProductsOpen(true)}
                   onMouseLeave={() => setIsProductsOpen(false)}
                 >

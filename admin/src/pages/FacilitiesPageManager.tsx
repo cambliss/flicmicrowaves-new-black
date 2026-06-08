@@ -354,11 +354,25 @@ function renderFacilitiesEditor(
             placeholder="image URL or /path"
           />
           {!!item?.image && (
-            <img
-              src={resolveImage(item.image)}
-              alt={`Facility ${index + 1}`}
-              style={{ width: '100%', maxWidth: 360, height: 160, objectFit: 'cover', borderRadius: 8, border: '1px solid #e5e7eb' }}
-            />
+            <>
+              <img
+                src={resolveImage(item.image)}
+                alt={`Facility ${index + 1}`}
+                style={{ width: '100%', maxWidth: 360, height: 160, objectFit: 'cover', borderRadius: 8, border: '1px solid #e5e7eb' }}
+              />
+              <button
+                type="button"
+                className="btn btn-outline"
+                style={{ width: 'fit-content', padding: '6px 12px', fontSize: 12 }}
+                onClick={() => {
+                  const next = [...items];
+                  next[index] = { ...next[index], image: '' };
+                  setItems(next);
+                }}
+              >
+                Remove Image
+              </button>
+            </>
           )}
           <input
             type="file"

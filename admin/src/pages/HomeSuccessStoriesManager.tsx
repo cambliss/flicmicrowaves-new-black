@@ -247,11 +247,21 @@ export default function HomeSuccessStoriesManager() {
                     placeholder="/facilities/facilities-reference.jpeg"
                   />
                   {!!story.imageUrl && (
-                    <img
-                      src={resolveImage(story.imageUrl)}
-                      alt={story.imageAlt || `Story ${index + 1}`}
-                      style={{ width: '100%', maxWidth: 360, height: 160, objectFit: 'cover', borderRadius: 8, border: '1px solid #e5e7eb' }}
-                    />
+                    <>
+                      <img
+                        src={resolveImage(story.imageUrl)}
+                        alt={story.imageAlt || `Story ${index + 1}`}
+                        style={{ width: '100%', maxWidth: 360, height: 160, objectFit: 'cover', borderRadius: 8, border: '1px solid #e5e7eb' }}
+                      />
+                      <button
+                        type="button"
+                        className="btn btn-outline"
+                        style={{ width: 'fit-content', padding: '6px 12px', fontSize: 12 }}
+                        onClick={() => handleStoryChange(index, 'imageUrl', '')}
+                      >
+                        Remove Image
+                      </button>
+                    </>
                   )}
                   <input
                     type="file"

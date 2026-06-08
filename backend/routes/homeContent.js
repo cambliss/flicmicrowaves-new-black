@@ -2716,7 +2716,7 @@ router.put('/industries', auth, (req, res) => {
     industries: {
       heading: req.body.heading,
       subtitle: req.body.subtitle,
-      image: current.industries?.image || '',
+      image: typeof req.body.image === 'string' ? req.body.image : current.industries?.image || '',
       items: req.body.items,
     },
   });
@@ -2799,7 +2799,7 @@ router.put('/innovation', auth, (req, res) => {
       points: req.body.points,
       buttonText: req.body.buttonText,
       buttonUrl: req.body.buttonUrl,
-      image: current.innovation?.image || '',
+      image: typeof req.body.image === 'string' ? req.body.image : current.innovation?.image || '',
     },
   });
 
@@ -2868,7 +2868,10 @@ router.put('/footer', auth, (req, res) => {
       email: req.body.email,
       phone: req.body.phone,
       address: req.body.address,
-      backgroundImage: current.footer?.backgroundImage || '',
+      backgroundImage:
+        typeof req.body.backgroundImage === 'string'
+          ? req.body.backgroundImage
+          : current.footer?.backgroundImage || '',
       qualityBadges: req.body.qualityBadges,
       socialLinks: req.body.socialLinks,
       officeLocations: req.body.officeLocations,
