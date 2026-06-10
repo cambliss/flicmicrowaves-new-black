@@ -408,7 +408,7 @@ const Contact = () => {
                     className="w-full bg-goldenrod/10 text-goldenrod py-4 rounded-lg font-semibold hover:bg-goldenrod hover:text-white transition-all duration-300 flex items-center justify-center gap-2 border-2 border-goldenrod"
                   >
                     <Clock className="w-5 h-5" />
-                    Book Appointment
+                    Contact Us
                   </a>
                 </div>
               </div>

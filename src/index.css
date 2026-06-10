@@ -21,6 +21,14 @@ body {
 	background: linear-gradient(180deg, #ffffff 0%, #fffdf8 100%);
 }
 
+/* Enforce sharp corners site-wide, including Tailwind rounded utilities. */
+*,
+*::before,
+*::after,
+[class*='rounded'] {
+	border-radius: 0 !important;
+}
+
 h1,
 h2,
 h3,

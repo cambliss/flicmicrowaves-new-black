@@ -50,7 +50,7 @@ const Navigation = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-[9999] bg-black font-montserrat pt-2 pb-1 px-3 sm:px-5">
       <div className="max-w-[96rem] mx-auto">
-        <div className="flex justify-between items-center h-[6rem] bg-black backdrop-blur-xl border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.25)] px-5 lg:px-7">
+        <div className="flex justify-between items-center h-[6rem] bg-black backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.25)] px-5 lg:px-7">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group shrink-0">
             <img
@@ -187,7 +187,7 @@ const Navigation = () => {
               href="/book-appointment"
               className="bg-goldenrod text-white px-5 xl:px-6 py-2.5 xl:py-3 font-semibold whitespace-nowrap shrink-0 hover:bg-goldenrod/90 transition-all duration-300 transform hover:scale-105"
             >
-              Book Appointment
+              Contact us
             </a>
           </div>
 
@@ -205,7 +205,7 @@ const Navigation = () => {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="lg:hidden mt-3">
-            <div className="flex flex-col space-y-4 bg-black backdrop-blur-xl border border-white/20 px-6 py-5 shadow-xl text-[0.93rem]">
+            <div className="flex flex-col space-y-4 bg-black backdrop-blur-xl px-6 py-5 shadow-xl text-[0.93rem]">
               {navItems.slice(0, 2).map((item) => (
                 item.path.startsWith('#') ? (
                   <button
@@ -287,7 +287,7 @@ const Navigation = () => {
                 onClick={() => setIsMenuOpen(false)}
                 className="bg-white text-goldenrod px-6 py-3 font-semibold hover:bg-black hover:text-white transition-all duration-300 w-full mt-4 text-center"
               >
-                Book Appointment
+                Contact us
               </Link>
             </div>
           </div>
