@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import Footer from '../components/Footer';
 import useCmsBanner from '../hooks/useCmsBanner';
 
-const BASE_URL = 'http://localhost:4001';
+const BASE_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:4001').replace(/\/$/, '');
 
 type GalleryItem = {
   image: string;

@@ -32,6 +32,8 @@ interface FooterContent {
   copyright: string;
 }
 
+const BASE_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:4001').replace(/\/$/, '');
+
 const emptyFooter: FooterContent = {
   description: '',
   email: '',
@@ -59,7 +61,7 @@ const Footer = () => {
 
   useEffect(() => {
     let mounted = true;
-    fetch('http://localhost:4001/api/home-content/footer')
+    fetch(`${BASE_URL}/api/home-content/footer`)
       .then((res) => {
         if (!res.ok) throw new Error('Failed to load footer');
         return res.json() as Promise<Partial<FooterContent>>;

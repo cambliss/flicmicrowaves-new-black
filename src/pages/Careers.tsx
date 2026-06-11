@@ -3,7 +3,7 @@ import { Briefcase, CheckCircle2, MapPin, Sparkles } from 'lucide-react';
 import Footer from '../components/Footer';
 import useCmsBanner from '../hooks/useCmsBanner';
 
-const BASE_URL = 'http://localhost:4001';
+const BASE_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:4001').replace(/\/$/, '');
 
 type Pair = { title: string; body: string };
 type Role = { title: string; location: string; type: string; experience: string; summary: string };

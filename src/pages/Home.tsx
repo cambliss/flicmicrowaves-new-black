@@ -115,6 +115,7 @@ const SOLUTION_ICONS = [Radio, Satellite, Shield, Globe, Target, Zap];
 const INDUSTRY_ICONS = [SatelliteDish, RadioTower, ShieldCheck, Factory, CircuitBoard, Target];
 const FEATURED_PRODUCT_ICONS = [Radio, Satellite, Shield, Zap, Globe, Target];
 const HOME_THEME_STORAGE_KEY = 'home-bw-mode';
+const BASE_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:4001').replace(/\/$/, '');
 
 export default function Home() {
   const slides = useCmsBannerSlides([]);
@@ -207,17 +208,17 @@ export default function Home() {
       };
 
       const [w, s, p, i, fp, inn, fpage, bpage, hdi, ha, hss] = await Promise.all([
-        fetchJson<WhyChooseContent>('http://localhost:4001/api/home-content/why-choose'),
-        fetchJson<SolutionsContent>('http://localhost:4001/api/home-content/solutions'),
-        fetchJson<ProcessContent>('http://localhost:4001/api/home-content/process'),
-        fetchJson<IndustryContent>('http://localhost:4001/api/home-content/industries'),
-        fetchJson<FeaturedProductsContent>('http://localhost:4001/api/home-content/featured-products'),
-        fetchJson<InnovationContent>('http://localhost:4001/api/home-content/innovation'),
-        fetchJson<FacilitiesPageContent>('http://localhost:4001/api/home-content/facilities-page'),
-        fetchJson<BlogsPageContent>('http://localhost:4001/api/home-content/blogs-page'),
-        fetchJson<HomeDarkIndustriesContent>('http://localhost:4001/api/home-content/home-dark-industries'),
-        fetchJson<HomeAdvantageContent>('http://localhost:4001/api/home-content/home-advantage'),
-        fetchJson<HomeSuccessStoriesContent>('http://localhost:4001/api/home-content/home-success-stories'),
+        fetchJson<WhyChooseContent>(`${BASE_URL}/api/home-content/why-choose`),
+        fetchJson<SolutionsContent>(`${BASE_URL}/api/home-content/solutions`),
+        fetchJson<ProcessContent>(`${BASE_URL}/api/home-content/process`),
+        fetchJson<IndustryContent>(`${BASE_URL}/api/home-content/industries`),
+        fetchJson<FeaturedProductsContent>(`${BASE_URL}/api/home-content/featured-products`),
+        fetchJson<InnovationContent>(`${BASE_URL}/api/home-content/innovation`),
+        fetchJson<FacilitiesPageContent>(`${BASE_URL}/api/home-content/facilities-page`),
+        fetchJson<BlogsPageContent>(`${BASE_URL}/api/home-content/blogs-page`),
+        fetchJson<HomeDarkIndustriesContent>(`${BASE_URL}/api/home-content/home-dark-industries`),
+        fetchJson<HomeAdvantageContent>(`${BASE_URL}/api/home-content/home-advantage`),
+        fetchJson<HomeSuccessStoriesContent>(`${BASE_URL}/api/home-content/home-success-stories`),
       ]);
 
       if (w) setWhyChoose(w);
@@ -249,12 +250,12 @@ export default function Home() {
   const industriesImage = industries.image
     ? industries.image.startsWith('http://') || industries.image.startsWith('https://')
       ? industries.image
-      : `http://localhost:4001/uploads/${industries.image}`
+      : `${BASE_URL}/uploads/${industries.image}`
     : '';
   const innovationImage = innovation.image
     ? innovation.image.startsWith('http://') || innovation.image.startsWith('https://')
       ? innovation.image
-      : `http://localhost:4001/uploads/${innovation.image}`
+      : `${BASE_URL}/uploads/${innovation.image}`
     : '';
   const homeDarkTiles = homeDarkIndustries.items.slice(0, 5);
   const homeDarkTitleParts = (homeDarkIndustries.title || '')
@@ -313,7 +314,7 @@ export default function Home() {
   const successStoriesImage = currentSuccessStory?.imageUrl
     ? currentSuccessStory.imageUrl.startsWith('http://') || currentSuccessStory.imageUrl.startsWith('https://') || currentSuccessStory.imageUrl.startsWith('/')
       ? currentSuccessStory.imageUrl
-      : `http://localhost:4001/uploads/${currentSuccessStory.imageUrl}`
+      : `${BASE_URL}/uploads/${currentSuccessStory.imageUrl}`
     : '';
   const whyChooseCards = whyChoose.items;
   const whyChooseStatement = whyChoose.subtitle || '';
@@ -729,7 +730,7 @@ export default function Home() {
             {featuredProducts.items.slice(0, 4).map((item, index) => {
               const Icon = FEATURED_PRODUCT_ICONS[index % FEATURED_PRODUCT_ICONS.length];
               const tileClass = index === 0 ? 'md:row-span-2' : index === 1 ? 'md:col-span-2' : 'md:col-span-1';
-              const image = item.image?.startsWith('http') || item.image?.startsWith('/') ? item.image : `http://localhost:4001/uploads/${item.image}`;
+              const image = item.image?.startsWith('http') || item.image?.startsWith('/') ? item.image : `${BASE_URL}/uploads/${item.image}`;
 
               return (
                 <Link
@@ -770,7 +771,7 @@ export default function Home() {
                 to={`/facilities#${facility.id}`}
                 className="group overflow-hidden rounded-[1.6rem] border border-white/10 bg-white/6 shadow-[0_18px_50px_rgba(0,0,0,0.28)] backdrop-blur-sm motion-soft-card"
               >
-                <img src={facility.image?.startsWith('http') || facility.image?.startsWith('/') ? facility.image : `http://localhost:4001/uploads/${facility.image}`} alt={facility.title} className="w-full h-44 object-cover" />
+                <img src={facility.image?.startsWith('http') || facility.image?.startsWith('/') ? facility.image : `${BASE_URL}/uploads/${facility.image}`} alt={facility.title} className="w-full h-44 object-cover" />
                 <div className="p-5">
                   <h3 className="text-[1.35rem] font-bold text-white mb-2 leading-tight">{facility.title}</h3>
                   <p className="text-goldenrod text-sm font-semibold mb-2">{facility.summary}</p>

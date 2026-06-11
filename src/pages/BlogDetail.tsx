@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import useCmsBanner from '../hooks/useCmsBanner';
 import { BLOG_REFERENCE_IMAGE, getBlogImageFromPost, normalizeBlogSlug } from '../data/blogs';
 
-const BASE_URL = 'http://localhost:4001';
+const BASE_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:4001').replace(/\/$/, '');
 
 type CmsPost = {
   title: string;
