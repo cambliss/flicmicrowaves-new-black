@@ -1,0 +1,85 @@
+name: Deploy to Hostinger VPS
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install & Build Main Frontend
+        run: |
+          npm ci
+          VITE_API_BASE_URL="" npm run build
+
+      - name: Install & Build Admin Panel
+        run: |
+          cd admin
+          npm ci
+          VITE_API_BASE_URL="" npm run build
+
+      - name: Setup SSH Key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: Add SSH Host Fingerprint to Known Hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H 31.97.207.46 >> ~/.ssh/known_hosts
+
+      - name: Deploy Frontend Static Files
+        run: |
+          rsync -avz --delete dist/ ${{ secrets.SSH_USERNAME || 'root' }}@31.97.207.46:/var/www/flicmicrowaves/frontend/
+
+      - name: Deploy Admin Panel Static Files
+        run: |
+          rsync -avz --delete admin/dist/ ${{ secrets.SSH_USERNAME || 'root' }}@31.97.207.46:/var/www/flicmicrowaves/admin/
+
+      - name: Deploy Backend Code
+        run: |
+          rsync -avz --exclude 'node_modules' --exclude '.env' backend/ ${{ secrets.SSH_USERNAME || 'root' }}@31.97.207.46:/var/www/flicmicrowaves/backend/
+
+      - name: Sync Nginx Config & Scripts
+        run: |
+          rsync -avz scripts/ ${{ secrets.SSH_USERNAME || 'root' }}@31.97.207.46:/var/www/flicmicrowaves/scripts/
+
+      - name: Execute Server Commands & Restart Services
+        run: |
+          ssh ${{ secrets.SSH_USERNAME || 'root' }}@31.97.207.46 << 'EOF'
+            set -e
+
+            # Install backend production dependencies
+            cd /var/www/flicmicrowaves/backend
+            npm install --production
+
+            # Update Nginx config if modified
+            if [ -f /var/www/flicmicrowaves/scripts/nginx-flic.conf ]; then
+              cp /var/www/flicmicrowaves/scripts/nginx-flic.conf /etc/nginx/sites-available/flicmicrowaves.conf
+              ln -sf /etc/nginx/sites-available/flicmicrowaves.conf /etc/nginx/sites-enabled/flicmicrowaves.conf
+              rm -f /etc/nginx/sites-enabled/default
+              nginx -t && systemctl reload nginx
+            fi
+
+            # Start or restart PM2 backend process
+            if pm2 list | grep -q "flic-backend"; then
+              pm2 reload /var/www/flicmicrowaves/backend/ecosystem.config.cjs --env production
+            else
+              pm2 start /var/www/flicmicrowaves/backend/ecosystem.config.cjs --env production
+              pm2 save
+            fi
+          EOF

@@ -13,16 +13,22 @@ router.post('/login', async (req, res) => {
     return res.status(400).json({ error: 'Username and password are required' });
   }
 
-  if (username !== process.env.ADMIN_USER) {
-    return res.status(401).json({ error: 'Invalid credentials' });
+  let valid = false;
+  let role = '';
+
+  if (username === process.env.ADMIN_USER) {
+    valid = await bcrypt.compare(password, process.env.ADMIN_PASS_HASH);
+    role = 'admin';
+  } else if (username === process.env.INVENTORY_USER) {
+    valid = await bcrypt.compare(password, process.env.INVENTORY_PASS_HASH);
+    role = 'inventory';
   }
 
-  const valid = await bcrypt.compare(password, process.env.ADMIN_PASS_HASH);
   if (!valid) {
     return res.status(401).json({ error: 'Invalid credentials' });
   }
 
-  const token = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: '24h' });
+  const token = jwt.sign({ username, role }, process.env.JWT_SECRET, { expiresIn: '24h' });
   res.json({ token });
 });
 
