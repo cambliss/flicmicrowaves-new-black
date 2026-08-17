@@ -1,3 +1,4 @@
+import { BASE_URL } from '../config/api';
 import { useEffect, useMemo, useState } from 'react';
 import { ArrowLeft, CalendarDays, Clock3, UserCircle2 } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';

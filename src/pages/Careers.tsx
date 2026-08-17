@@ -1,3 +1,4 @@
+import { BASE_URL } from '../config/api';
 import React, { useEffect, useState } from 'react';
 import { Briefcase, CheckCircle2, MapPin, Sparkles } from 'lucide-react';
 import Footer from '../components/Footer';

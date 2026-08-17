@@ -1,3 +1,4 @@
+import { BASE_URL } from '../config/api';
 import React, { useEffect, useMemo, useState } from 'react';
 import Footer from '../components/Footer';
 import useCmsBanner from '../hooks/useCmsBanner';

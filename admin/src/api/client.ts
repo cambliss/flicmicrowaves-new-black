@@ -1,6 +1,16 @@
 import axios from 'axios';
 
-const BASE_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:4001').replace(/\/$/, '');
+const getApiBaseUrl = () => {
+  if (import.meta.env.VITE_API_BASE_URL) {
+    return import.meta.env.VITE_API_BASE_URL.replace(/\/$/, '');
+  }
+  if (typeof window !== 'undefined' && !window.location.hostname.includes('localhost') && !window.location.hostname.includes('127.0.0.1')) {
+    return window.location.origin;
+  }
+  return 'http://localhost:4000';
+};
+
+const BASE_URL = getApiBaseUrl();
 
 const client = axios.create({ baseURL: BASE_URL });
 

@@ -1,3 +1,4 @@
+import { BASE_URL } from '../config/api';
 import { useEffect, useMemo, useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import Footer from '../components/Footer';

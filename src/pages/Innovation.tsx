@@ -1,3 +1,4 @@
+import { BASE_URL } from '../config/api';
 import React, { useEffect, useState } from 'react';
 import { ArrowRight, CheckCircle2, FlaskConical, Lightbulb } from 'lucide-react';
 import Footer from '../components/Footer';

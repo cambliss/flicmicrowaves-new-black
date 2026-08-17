@@ -1,3 +1,4 @@
+import { BASE_URL } from '../config/api';
 import React, { useEffect, useMemo, useState } from 'react';
 import { Mail, Phone, MapPin, Clock, Send, User, Building, Zap } from 'lucide-react';
 import Footer from '../components/Footer';
