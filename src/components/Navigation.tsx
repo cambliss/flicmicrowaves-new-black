@@ -7,6 +7,7 @@ import { groupProductsByCategory } from '../utils/catalog';
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [catalogProducts, setCatalogProducts] = useState<Product[]>([]);
   const location = useLocation();
 
@@ -18,34 +19,20 @@ const Navigation = () => {
 
   const catalogGroups = useMemo(() => groupProductsByCategory(catalogProducts), [catalogProducts]);
 
-  const navItems = [
+  const aboutItems = [
+    { name: 'About Us', path: '/about', description: 'Our history, mission, and company vision' },
+    { name: 'Careers', path: '/careers', description: 'Join our team of microwave & RF engineers' },
+    { name: 'Blogs', path: '/blogs', description: 'Latest news, technical insights & articles' },
+    { name: 'Gallery', path: '/gallery', description: 'Explore our technology & product showcase' },
+    { name: 'Innovation', path: '/innovation', description: 'R&D initiatives and cutting-edge tech' },
+  ];
+
+  const mainNavItems = [
     { name: 'Home', path: '/' },
-    { name: 'About Us', path: '/about' },
     { name: 'Solutions', path: '/solutions' },
     { name: 'Industries', path: '/industries' },
     { name: 'Facilities', path: '/facilities' },
-    { name: 'Careers', path: '/careers' },
-    { name: 'Blogs', path: '/blogs' },
-    { name: 'Gallery', path: '/gallery' },
-    { name: 'Innovation', path: '/innovation' },
-    { name: 'Contact', path: '/contact' },
   ];
-
-  const handleNavClick = (path: string) => {
-    if (path.startsWith('#')) {
-      // Handle anchor links
-      if (location.pathname !== '/') {
-        // If not on home page, navigate to home first then scroll
-        window.location.href = `/${path}`;
-      } else {
-        // If on home page, just scroll
-        const element = document.querySelector(path);
-        element?.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-    setIsMenuOpen(false);
-    setIsProductsOpen(false);
-  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-[9999] bg-black font-montserrat pt-2 pb-1 px-3 sm:px-5">
@@ -61,52 +48,78 @@ const Navigation = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-5 xl:gap-6 relative text-[0.93rem]">
-            {navItems.slice(0, 2).map((item) => (
-              item.name === 'Home' ? (
-                <Link
-                  key={item.name}
-                  to={item.path}
-                  className={`transition-colors duration-300 font-semibold tracking-[0.02em] whitespace-nowrap ${
-                    location.pathname === item.path 
-                      ? 'text-white' 
-                      : 'text-white/90 hover:text-goldenrod'
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              ) : (
-                <Link
-                  key={item.name}
-                  to={item.path}
-                  className={`transition-colors duration-300 font-semibold tracking-[0.02em] whitespace-nowrap ${
-                    location.pathname === item.path 
-                      ? 'text-white' 
-                      : 'text-white/90 hover:text-goldenrod'
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              )
-            ))}
-            
-            {/* Products Dropdown */}
-            <div className="relative">
+          <div className="hidden lg:flex items-center gap-5 xl:gap-7 relative text-[0.95rem]">
+            <Link
+              to="/"
+              className={`transition-colors duration-300 font-semibold tracking-[0.02em] whitespace-nowrap ${
+                location.pathname === '/' 
+                  ? 'text-goldenrod' 
+                  : 'text-white/90 hover:text-goldenrod'
+              }`}
+            >
+              Home
+            </Link>
+
+            {/* About Us Dropdown */}
+            <div 
+              className="relative"
+              onMouseEnter={() => setIsAboutOpen(true)}
+              onMouseLeave={() => setIsAboutOpen(false)}
+            >
               <button
-                onMouseEnter={() => setIsProductsOpen(true)}
-                onMouseLeave={() => setIsProductsOpen(false)}
-                className="text-white hover:text-goldenrod transition-colors duration-300 font-semibold tracking-[0.02em] flex items-center gap-1 whitespace-nowrap"
+                className={`transition-colors duration-300 font-semibold tracking-[0.02em] flex items-center gap-1.5 whitespace-nowrap py-2 ${
+                  aboutItems.some(i => location.pathname === i.path)
+                    ? 'text-goldenrod'
+                    : 'text-white hover:text-goldenrod'
+                }`}
+              >
+                About Us
+                <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isAboutOpen ? 'rotate-180 text-goldenrod' : ''}`} />
+              </button>
+
+              {/* About Us Dropdown Menu */}
+              {isAboutOpen && (
+                <div className="absolute top-full left-0 w-64 bg-black/95 backdrop-blur-2xl shadow-2xl border border-white/20 py-3 rounded-lg z-[10000]">
+                  {aboutItems.map((item) => (
+                    <Link
+                      key={item.name}
+                      to={item.path}
+                      onClick={() => setIsAboutOpen(false)}
+                      className={`block px-5 py-2.5 transition-all duration-200 text-sm ${
+                        location.pathname === item.path
+                          ? 'text-goldenrod bg-goldenrod/10 font-semibold'
+                          : 'text-white/80 hover:text-white hover:bg-white/10'
+                      }`}
+                    >
+                      <div className="font-semibold">{item.name}</div>
+                      <div className="text-[0.75rem] text-white/50 font-normal mt-0.5">{item.description}</div>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Products Dropdown */}
+            <div 
+              className="relative"
+              onMouseEnter={() => setIsProductsOpen(true)}
+              onMouseLeave={() => setIsProductsOpen(false)}
+            >
+              <button
+                className={`transition-colors duration-300 font-semibold tracking-[0.02em] flex items-center gap-1.5 whitespace-nowrap py-2 ${
+                  location.pathname.startsWith('/products')
+                    ? 'text-goldenrod'
+                    : 'text-white hover:text-goldenrod'
+                }`}
               >
                 Products
-                <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isProductsOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isProductsOpen ? 'rotate-180 text-goldenrod' : ''}`} />
               </button>
-              
-              {/* Dropdown Menu */}
+
+              {/* Products Dropdown Menu */}
               {isProductsOpen && (
                 <div 
                   className="fixed top-[6.9rem] left-1/2 -translate-x-1/2 w-[min(1200px,95vw)] bg-black/95 backdrop-blur-2xl shadow-2xl border border-white/20 p-8 xl:p-12 z-[10000]"
-                  onMouseEnter={() => setIsProductsOpen(true)}
-                  onMouseLeave={() => setIsProductsOpen(false)}
                 >
                   <div className="grid grid-cols-5 gap-8">
                     {catalogGroups.length > 0 ? (
@@ -157,38 +170,28 @@ const Navigation = () => {
                 </div>
               )}
             </div>
-            
-            {/* Remaining Navigation Items */}
-            {navItems.slice(2, -1).map((item) => (
-              item.path.startsWith('#') ? (
-                <button
-                  key={item.name}
-                  onClick={() => handleNavClick(item.path)}
-                  className="text-white/90 hover:text-goldenrod transition-colors duration-300 font-medium"
-                >
-                  {item.name}
-                </button>
-              ) : (
-                <Link
-                  key={item.name}
-                  to={item.path}
-                  className={`transition-colors duration-300 font-semibold tracking-[0.02em] whitespace-nowrap ${
-                    location.pathname === item.path 
-                      ? 'text-white' 
-                      : 'text-white/90 hover:text-goldenrod'
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              )
+
+            {/* Other Main Navigation Items */}
+            {mainNavItems.slice(1).map((item) => (
+              <Link
+                key={item.name}
+                to={item.path}
+                className={`transition-colors duration-300 font-semibold tracking-[0.02em] whitespace-nowrap ${
+                  location.pathname === item.path 
+                    ? 'text-goldenrod' 
+                    : 'text-white/90 hover:text-goldenrod'
+                }`}
+              >
+                {item.name}
+              </Link>
             ))}
-            
-            <a
-              href="/book-appointment"
-              className="bg-goldenrod text-white px-5 xl:px-6 py-2.5 xl:py-3 font-semibold whitespace-nowrap shrink-0 hover:bg-goldenrod/90 transition-all duration-300 transform hover:scale-105"
+
+            <Link
+              to="/book-appointment"
+              className="bg-goldenrod text-white px-5 xl:px-6 py-2.5 xl:py-3 font-semibold whitespace-nowrap shrink-0 hover:bg-goldenrod/90 transition-all duration-300 transform hover:scale-105 rounded"
             >
               Contact us
-            </a>
+            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -206,86 +209,90 @@ const Navigation = () => {
         {isMenuOpen && (
           <div className="lg:hidden mt-3">
             <div className="flex flex-col space-y-4 bg-black backdrop-blur-xl px-6 py-5 shadow-xl text-[0.93rem]">
-              {navItems.slice(0, 2).map((item) => (
-                item.path.startsWith('#') ? (
-                  <button
-                    key={item.name}
-                    onClick={() => handleNavClick(item.path)}
-                    className="text-white hover:text-goldenrod transition-colors duration-300 font-semibold tracking-[0.02em] text-left"
-                  >
-                    {item.name}
-                  </button>
-                ) : (
-                  <Link
-                    key={item.name}
-                    to={item.path}
-                    onClick={() => setIsMenuOpen(false)}
-                    className={`transition-colors duration-300 font-semibold tracking-[0.02em] ${
-                      location.pathname === item.path 
-                        ? 'text-white' 
-                        : 'text-white/90 hover:text-goldenrod'
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                )
-              ))}
-              
-              <button
-                onClick={() => setIsProductsOpen(!isProductsOpen)}
-                className="text-white hover:text-goldenrod transition-colors duration-300 font-semibold tracking-[0.02em] text-left flex items-center gap-2"
+              <Link
+                to="/"
+                onClick={() => setIsMenuOpen(false)}
+                className={`transition-colors duration-300 font-semibold tracking-[0.02em] ${
+                  location.pathname === '/' ? 'text-goldenrod' : 'text-white/90 hover:text-goldenrod'
+                }`}
               >
-                Products
-                <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isProductsOpen ? 'rotate-180' : ''}`} />
-              </button>
-              {isProductsOpen && (
-                  <div className="ml-4 mt-2 p-4 bg-white/10 border border-white/25 backdrop-blur-lg">
-                  <div className="space-y-3">
-                    <div>
-                      <h4 className="font-semibold text-white text-sm mb-1">RF Components</h4>
-                      <p className="text-white/80 text-xs">Filters, Amplifiers, Switches</p>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-white text-sm mb-1">Transceivers</h4>
-                      <p className="text-white/80 text-xs">5G, Satellite, Military</p>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-white text-sm mb-1">Frequency Solutions</h4>
-                      <p className="text-white/80 text-xs">Oscillators, Synthesizers</p>
+                Home
+              </Link>
+
+              {/* About Us Submenu */}
+              <div>
+                <button
+                  onClick={() => setIsAboutOpen(!isAboutOpen)}
+                  className="text-white hover:text-goldenrod transition-colors duration-300 font-semibold tracking-[0.02em] text-left flex items-center justify-between w-full"
+                >
+                  About Us
+                  <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isAboutOpen ? 'rotate-180 text-goldenrod' : ''}`} />
+                </button>
+                {isAboutOpen && (
+                  <div className="ml-4 mt-2 p-3 bg-white/10 border border-white/20 space-y-2 rounded">
+                    {aboutItems.map((item) => (
+                      <Link
+                        key={item.name}
+                        to={item.path}
+                        onClick={() => setIsMenuOpen(false)}
+                        className={`block text-sm py-1.5 transition-colors ${
+                          location.pathname === item.path ? 'text-goldenrod font-semibold' : 'text-white/80 hover:text-white'
+                        }`}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Products Submenu */}
+              <div>
+                <button
+                  onClick={() => setIsProductsOpen(!isProductsOpen)}
+                  className="text-white hover:text-goldenrod transition-colors duration-300 font-semibold tracking-[0.02em] text-left flex items-center justify-between w-full"
+                >
+                  Products
+                  <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isProductsOpen ? 'rotate-180 text-goldenrod' : ''}`} />
+                </button>
+                {isProductsOpen && (
+                  <div className="ml-4 mt-2 p-4 bg-white/10 border border-white/25 backdrop-blur-lg rounded">
+                    <div className="space-y-3">
+                      <div>
+                        <h4 className="font-semibold text-white text-sm mb-1">RF Components</h4>
+                        <p className="text-white/80 text-xs">Filters, Amplifiers, Switches</p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-white text-sm mb-1">Transceivers</h4>
+                        <p className="text-white/80 text-xs">5G, Satellite, Military</p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-white text-sm mb-1">Frequency Solutions</h4>
+                        <p className="text-white/80 text-xs">Oscillators, Synthesizers</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              )}
-              
-              {navItems.slice(2).map((item) => (
-                item.path.startsWith('#') ? (
-                  <button
-                    key={item.name}
-                    onClick={() => handleNavClick(item.path)}
-                    className="text-white hover:text-goldenrod transition-colors duration-300 font-semibold tracking-[0.02em] text-left"
-                  >
-                    {item.name}
-                  </button>
-                ) : (
-                  <Link
-                    key={item.name}
-                    to={item.path}
-                    onClick={() => setIsMenuOpen(false)}
-                    className={`transition-colors duration-300 font-semibold tracking-[0.02em] ${
-                      location.pathname === item.path 
-                        ? 'text-white' 
-                        : 'text-white/90 hover:text-goldenrod'
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                )
+                )}
+              </div>
+
+              {/* Main Nav Items */}
+              {mainNavItems.slice(1).map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.path}
+                  onClick={() => setIsMenuOpen(false)}
+                  className={`transition-colors duration-300 font-semibold tracking-[0.02em] ${
+                    location.pathname === item.path ? 'text-goldenrod' : 'text-white/90 hover:text-goldenrod'
+                  }`}
+                >
+                  {item.name}
+                </Link>
               ))}
-              
+
               <Link
-                to="/contact"
+                to="/book-appointment"
                 onClick={() => setIsMenuOpen(false)}
-                className="bg-white text-goldenrod px-6 py-3 font-semibold hover:bg-black hover:text-white transition-all duration-300 w-full mt-4 text-center"
+                className="bg-goldenrod text-white px-6 py-3 font-semibold hover:bg-goldenrod/90 transition-all duration-300 w-full mt-4 text-center rounded"
               >
                 Contact us
               </Link>
