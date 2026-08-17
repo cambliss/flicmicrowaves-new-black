@@ -32,36 +32,57 @@ jobs:
           npm ci
           VITE_API_BASE_URL="" npm run build
 
-      - name: Setup SSH Key
-        uses: webfactory/ssh-agent@v0.9.0
+      - name: Deploy Main Frontend Files
+        uses: appleboy/scp-action@v0.1.7
         with:
-          ssh-private-key: ${{ secrets.SSH_KEY }}
+          host: 31.97.207.46
+          username: root
+          key: ${{ secrets.SSH_KEY }}
+          source: "dist/*"
+          target: "/var/www/flicmicrowaves/frontend"
+          strip_components: 1
 
-      - name: Add SSH Host Fingerprint to Known Hosts
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan -H 31.97.207.46 >> ~/.ssh/known_hosts
+      - name: Deploy Admin Panel Files
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: 31.97.207.46
+          username: root
+          key: ${{ secrets.SSH_KEY }}
+          source: "admin/dist/*"
+          target: "/var/www/flicmicrowaves/admin"
+          strip_components: 2
 
-      - name: Deploy Frontend Static Files
-        run: |
-          rsync -avz --delete dist/ ${{ secrets.SSH_USERNAME || 'root' }}@31.97.207.46:/var/www/flicmicrowaves/frontend/
+      - name: Deploy Backend Files
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: 31.97.207.46
+          username: root
+          key: ${{ secrets.SSH_KEY }}
+          source: "backend/*"
+          target: "/var/www/flicmicrowaves/backend"
+          strip_components: 1
 
-      - name: Deploy Admin Panel Static Files
-        run: |
-          rsync -avz --delete admin/dist/ ${{ secrets.SSH_USERNAME || 'root' }}@31.97.207.46:/var/www/flicmicrowaves/admin/
-
-      - name: Deploy Backend Code
-        run: |
-          rsync -avz --exclude 'node_modules' --exclude '.env' backend/ ${{ secrets.SSH_USERNAME || 'root' }}@31.97.207.46:/var/www/flicmicrowaves/backend/
-
-      - name: Sync Nginx Config & Scripts
-        run: |
-          rsync -avz scripts/ ${{ secrets.SSH_USERNAME || 'root' }}@31.97.207.46:/var/www/flicmicrowaves/scripts/
+      - name: Deploy Scripts
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: 31.97.207.46
+          username: root
+          key: ${{ secrets.SSH_KEY }}
+          source: "scripts/*"
+          target: "/var/www/flicmicrowaves/scripts"
+          strip_components: 1
 
       - name: Execute Server Commands & Restart Services
-        run: |
-          ssh ${{ secrets.SSH_USERNAME || 'root' }}@31.97.207.46 << 'EOF'
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 31.97.207.46
+          username: root
+          key: ${{ secrets.SSH_KEY }}
+          script: |
             set -e
+
+            # Ensure directories exist
+            mkdir -p /var/www/flicmicrowaves/frontend /var/www/flicmicrowaves/admin /var/www/flicmicrowaves/backend
 
             # Install backend production dependencies
             cd /var/www/flicmicrowaves/backend
@@ -82,4 +103,4 @@ jobs:
               pm2 start /var/www/flicmicrowaves/backend/ecosystem.config.cjs --env production
               pm2 save
             fi
-          EOF
+
