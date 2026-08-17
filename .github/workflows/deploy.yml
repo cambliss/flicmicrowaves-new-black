@@ -81,8 +81,10 @@ jobs:
           script: |
             set -e
 
-            # Ensure directories exist
+            # Ensure directories exist and have readable permissions for Nginx
             mkdir -p /var/www/flicmicrowaves/frontend /var/www/flicmicrowaves/admin /var/www/flicmicrowaves/backend
+            chmod -R 755 /var/www/flicmicrowaves
+            chown -R www-data:www-data /var/www/flicmicrowaves
 
             # Install backend production dependencies
             cd /var/www/flicmicrowaves/backend
