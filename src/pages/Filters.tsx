@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ArrowLeft, ArrowRight, Filter, Radio, CheckCircle, Mail, Phone,
   TrendingUp, Settings, Layers,
@@ -203,7 +203,7 @@ const Filters = () => {
                       </button>
                     </div>
                   ) : (
-                    <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                       {filteredProducts.map((product) => (
                         <ProductCard key={product.id} product={product} onClick={() => setSelectedProduct(product)} />
                       ))}
@@ -228,39 +228,35 @@ function ProductCard({ product, onClick }: { product: Product; onClick: () => vo
   return (
     <div
       onClick={onClick}
-      className="bg-white rounded-2xl border border-goldenrod/20 hover:border-goldenrod/40 cursor-pointer transition-all duration-300 hover:shadow-xl group transform hover:-translate-y-2 overflow-hidden"
+      className="bg-[#111113] rounded-2xl border border-white/15 hover:border-goldenrod/60 cursor-pointer transition-all duration-300 hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)] group transform hover:-translate-y-2 flex flex-col justify-between overflow-hidden"
     >
-      <div className="w-full h-40 bg-goldenrod/5 overflow-hidden">
+      <div className="w-full h-56 bg-black/60 p-4 relative flex items-center justify-center border-b border-white/10 overflow-hidden">
         {imgUrl ? (
-          <img src={imgUrl} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+          <img
+            src={imgUrl}
+            alt={product.name}
+            className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500 ease-out drop-shadow-[0_8px_16px_rgba(0,0,0,0.8)]"
+          />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
             <Radio className="w-12 h-12 text-goldenrod/30" />
           </div>
         )}
+        <div className="absolute top-3 right-3 bg-black/80 border border-goldenrod/40 rounded-full px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-wider text-goldenrod backdrop-blur-md">
+          {product.category}
+        </div>
       </div>
-      <div className="p-6">
-        <h3 className="text-xl font-bold text-black mb-4 group-hover:text-goldenrod transition-colors duration-300">
-          {product.name}
-        </h3>
-        {product.specifications.length > 0 && (
-          <div className="space-y-2 mb-4">
-            {product.specifications.slice(0, 4).map((spec) => (
-              <div key={spec.id} className="flex justify-between items-center">
-                <span className="text-black/60 text-sm font-opensans">{spec.key}:</span>
-                <span className="font-semibold text-black text-sm font-opensans">{spec.value}</span>
-              </div>
-            ))}
-          </div>
-        )}
-        {product.description && (
-          <p className="text-black/70 text-sm leading-relaxed mb-4 line-clamp-3 font-opensans">
-            {product.description}
+      <div className="p-6 flex flex-col justify-between flex-1">
+        <div>
+          <h3 className="text-xl font-bold text-white mb-2 group-hover:text-goldenrod transition-colors duration-300 leading-snug">
+            {product.name}
+          </h3>
+          <p className="text-goldenrod font-bold text-sm tracking-wide">
+            {product.price || 'Price on Request'}
           </p>
-        )}
-        {product.price && <p className="text-goldenrod font-bold text-sm mb-4">{product.price}</p>}
-        <button className="w-full bg-goldenrod text-white py-3 rounded-lg font-semibold hover:bg-goldenrod/90 transition-all duration-300 flex items-center justify-center gap-2">
-          View Details <ArrowRight className="w-4 h-4" />
+        </div>
+        <button className="w-full bg-goldenrod text-white py-3 px-4 rounded-xl font-montserrat font-semibold hover:bg-goldenrod/90 transition-all duration-300 flex items-center justify-center gap-2 mt-6 group-hover:shadow-[0_8px_20px_rgba(218,165,32,0.35)]">
+          View Details <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
         </button>
       </div>
     </div>

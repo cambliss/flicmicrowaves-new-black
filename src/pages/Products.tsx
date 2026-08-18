@@ -319,51 +319,36 @@ function ProductCard({ product }: { product: Product }) {
   return (
     <Link
       to={`/products/${product.id}`}
-      className="bg-white/5 rounded-2xl border border-white/12 hover:border-goldenrod/35 transition-all duration-300 hover:shadow-[0_24px_64px_rgba(0,0,0,0.38)] group transform hover:-translate-y-2 overflow-hidden block motion-soft-card backdrop-blur-sm"
+      className="bg-[#111113] rounded-2xl border border-white/15 hover:border-goldenrod/60 transition-all duration-300 hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)] group transform hover:-translate-y-2 flex flex-col justify-between overflow-hidden block motion-soft-card"
     >
-      <div className="w-full h-48 bg-black/50 overflow-hidden relative">
+      <div className="w-full h-56 bg-black/60 p-4 relative flex items-center justify-center border-b border-white/10 overflow-hidden">
         {imgUrl ? (
           <img
             src={imgUrl}
             alt={product.name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500 ease-out drop-shadow-[0_8px_16px_rgba(0,0,0,0.8)]"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-black/55">
-            <Zap className="w-16 h-16 text-goldenrod/30" />
+          <div className="w-full h-full flex items-center justify-center">
+            <Zap className="w-12 h-12 text-goldenrod/30" />
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/20 group-hover:from-black/45 transition-colors duration-300" />
-        <div className="absolute top-4 right-4 bg-black/70 border border-goldenrod/35 rounded-full px-3 py-1 text-xs font-semibold text-goldenrod backdrop-blur-sm">
+        <div className="absolute top-3 right-3 bg-black/80 border border-goldenrod/40 rounded-full px-3 py-1 text-[0.7rem] font-semibold uppercase tracking-wider text-goldenrod backdrop-blur-md">
           {product.category}
         </div>
       </div>
 
-      <div className="p-6">
-        <h3 className="text-xl font-bold text-white mb-3 group-hover:text-goldenrod transition-colors duration-300">
-          {product.name}
-        </h3>
-        {product.description && (
-          <p className="text-white/72 leading-relaxed mb-4 font-opensans line-clamp-3">
-            {product.description}
+      <div className="p-6 flex flex-col justify-between flex-1">
+        <div>
+          <h3 className="text-xl font-bold text-white mb-2 group-hover:text-goldenrod transition-colors duration-300 leading-snug">
+            {product.name}
+          </h3>
+          <p className="text-goldenrod font-bold text-sm tracking-wide">
+            {product.price || 'Price on Request'}
           </p>
-        )}
-        {product.features.length > 0 && (
-          <div className="mb-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-white/50 mb-2">Key Features</p>
-            <ul className="space-y-1">
-              {product.features.slice(0, 3).map((feature, index) => (
-                <li key={index} className="text-white/65 text-sm flex items-center gap-2 font-opensans">
-                  <span className="w-1.5 h-1.5 rounded-full bg-goldenrod flex-shrink-0" />
-                  {feature}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        {product.price && <p className="text-goldenrod font-bold text-sm mb-4">{product.price}</p>}
-        <div className="w-full bg-goldenrod text-white py-3 rounded-lg font-semibold flex items-center justify-center gap-2">
-          View Details <ArrowRight className="w-4 h-4" />
+        </div>
+        <div className="w-full bg-goldenrod text-white py-3 px-4 rounded-xl font-montserrat font-semibold flex items-center justify-center gap-2 mt-6 group-hover:shadow-[0_8px_20px_rgba(218,165,32,0.35)]">
+          View Details <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
         </div>
       </div>
     </Link>
