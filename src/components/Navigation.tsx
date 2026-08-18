@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Menu, X, ChevronDown, ArrowRight } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { fetchProducts, type Product } from '../api/products';
@@ -11,10 +11,34 @@ const Navigation = () => {
   const [catalogProducts, setCatalogProducts] = useState<Product[]>([]);
   const location = useLocation();
 
+  const aboutRef = useRef<HTMLDivElement>(null);
+  const productsRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     fetchProducts()
       .then(setCatalogProducts)
       .catch(() => setCatalogProducts([]));
+  }, []);
+
+  // Close menus on page route change
+  useEffect(() => {
+    setIsProductsOpen(false);
+    setIsAboutOpen(false);
+    setIsMenuOpen(false);
+  }, [location.pathname]);
+
+  // Click outside listener to close dropdowns
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (aboutRef.current && !aboutRef.current.contains(event.target as Node)) {
+        setIsAboutOpen(false);
+      }
+      if (productsRef.current && !productsRef.current.contains(event.target as Node)) {
+        setIsProductsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   const catalogGroups = useMemo(() => groupProductsByCategory(catalogProducts), [catalogProducts]);
@@ -61,14 +85,15 @@ const Navigation = () => {
             </Link>
 
             {/* About Us Dropdown */}
-            <div 
-              className="relative"
-              onMouseEnter={() => setIsAboutOpen(true)}
-              onMouseLeave={() => setIsAboutOpen(false)}
-            >
+            <div ref={aboutRef} className="relative">
               <button
+                type="button"
+                onClick={() => {
+                  setIsAboutOpen((prev) => !prev);
+                  setIsProductsOpen(false);
+                }}
                 className={`transition-colors duration-300 font-semibold tracking-[0.02em] flex items-center gap-1.5 whitespace-nowrap py-2 ${
-                  aboutItems.some(i => location.pathname === i.path)
+                  aboutItems.some((i) => location.pathname === i.path)
                     ? 'text-goldenrod'
                     : 'text-white hover:text-goldenrod'
                 }`}
@@ -100,12 +125,13 @@ const Navigation = () => {
             </div>
 
             {/* Products Dropdown */}
-            <div 
-              className="relative"
-              onMouseEnter={() => setIsProductsOpen(true)}
-              onMouseLeave={() => setIsProductsOpen(false)}
-            >
+            <div ref={productsRef} className="relative">
               <button
+                type="button"
+                onClick={() => {
+                  setIsProductsOpen((prev) => !prev);
+                  setIsAboutOpen(false);
+                }}
                 className={`transition-colors duration-300 font-semibold tracking-[0.02em] flex items-center gap-1.5 whitespace-nowrap py-2 ${
                   location.pathname.startsWith('/products')
                     ? 'text-goldenrod'
