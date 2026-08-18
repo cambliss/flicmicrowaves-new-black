@@ -186,8 +186,12 @@ export default function ProductForm() {
     }
 
     const totalImages = existingImages.length + imageFiles.length;
-    if (totalImages < 3 || totalImages > 4) {
-      setError('Please keep 3 to 4 product images for each product.');
+    if (totalImages < 1) {
+      setError('Please upload at least 1 product image.');
+      return;
+    }
+    if (totalImages > 4) {
+      setError('Maximum 4 product images allowed per product.');
       return;
     }
 
@@ -356,7 +360,7 @@ export default function ProductForm() {
             </div>
 
             <div style={{ flex: 1 }}>
-              <label>Upload 3 to 4 images (JPG, PNG, WebP — max 20 MB each)</label>
+              <label>Upload 1 to 4 images (JPG, PNG, WebP — max 20 MB each)</label>
               <input
                 type="file"
                 accept="image/jpeg,image/png,image/gif,image/webp"
