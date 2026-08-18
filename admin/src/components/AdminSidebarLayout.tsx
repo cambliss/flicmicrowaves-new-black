@@ -182,27 +182,29 @@ export default function AdminSidebarLayout({ children }: AdminSidebarLayoutProps
           <p>CMS Dashboard</p>
         </div>
 
-        <div className="admin-sidebar-section">
-          {dashboardItems.map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              className={({ isActive }) => `admin-sidebar-link ${isActive ? 'admin-sidebar-link-active' : ''}`}
-            >
-              {item.label}
-            </NavLink>
-          ))}
-        </div>
+        <div className="admin-sidebar-nav">
+          <div className="admin-sidebar-section">
+            {dashboardItems.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                className={({ isActive }) => `admin-sidebar-link ${isActive ? 'admin-sidebar-link-active' : ''}`}
+              >
+                {item.label}
+              </NavLink>
+            ))}
+          </div>
 
-        <SidebarGroup title="Home Page" items={homeItems} open={homeOpen} onToggle={() => setHomeOpen((prev) => !prev)} />
-        <SidebarGroup title="About Us Page" items={aboutItems} open={aboutOpen} onToggle={() => setAboutOpen((prev) => !prev)} />
-        <SidebarGroup title="Solutions Page" items={solutionsPageItems} open={solutionsOpen} onToggle={() => setSolutionsOpen((prev) => !prev)} />
-        <SidebarGroup title="Industries Page" items={industriesPageItems} open={industriesOpen} onToggle={() => setIndustriesOpen((prev) => !prev)} />
-        <SidebarGroup title="Careers Page" items={careersPageItems} open={careersOpen} onToggle={() => setCareersOpen((prev) => !prev)} />
-        <SidebarGroup title="Blogs Page" items={blogsPageItems} open={blogsOpen} onToggle={() => setBlogsOpen((prev) => !prev)} />
-        <SidebarGroup title="Innovation Page" items={innovationPageItems} open={innovationPageOpen} onToggle={() => setInnovationPageOpen((prev) => !prev)} />
-        <SidebarGroup title="Facilities Page" items={facilitiesPageItems} open={facilitiesPageOpen} onToggle={() => setFacilitiesPageOpen((prev) => !prev)} />
-        <SidebarGroup title="Contact Page" items={contactPageItems} open={contactPageOpen} onToggle={() => setContactPageOpen((prev) => !prev)} />
+          <SidebarGroup title="Home Page" items={homeItems} open={homeOpen} onToggle={() => setHomeOpen((prev) => !prev)} />
+          <SidebarGroup title="About Us Page" items={aboutItems} open={aboutOpen} onToggle={() => setAboutOpen((prev) => !prev)} />
+          <SidebarGroup title="Solutions Page" items={solutionsPageItems} open={solutionsOpen} onToggle={() => setSolutionsOpen((prev) => !prev)} />
+          <SidebarGroup title="Industries Page" items={industriesPageItems} open={industriesOpen} onToggle={() => setIndustriesOpen((prev) => !prev)} />
+          <SidebarGroup title="Careers Page" items={careersPageItems} open={careersOpen} onToggle={() => setCareersOpen((prev) => !prev)} />
+          <SidebarGroup title="Blogs Page" items={blogsPageItems} open={blogsOpen} onToggle={() => setBlogsOpen((prev) => !prev)} />
+          <SidebarGroup title="Innovation Page" items={innovationPageItems} open={innovationPageOpen} onToggle={() => setInnovationPageOpen((prev) => !prev)} />
+          <SidebarGroup title="Facilities Page" items={facilitiesPageItems} open={facilitiesPageOpen} onToggle={() => setFacilitiesPageOpen((prev) => !prev)} />
+          <SidebarGroup title="Contact Page" items={contactPageItems} open={contactPageOpen} onToggle={() => setContactPageOpen((prev) => !prev)} />
+        </div>
 
         <div className="admin-sidebar-footer">
           <button className="btn btn-secondary" style={{ width: '100%' }} onClick={handleLogout}>

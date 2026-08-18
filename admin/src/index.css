@@ -110,12 +110,39 @@ label {
   top: 0;
   align-self: start;
   height: 100vh;
+  max-height: 100vh;
   background: linear-gradient(180deg, #080808 0%, #101012 100%);
   border-right: 1px solid var(--admin-border);
   display: flex;
   flex-direction: column;
   gap: 10px;
   padding: 18px 14px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.admin-sidebar-nav {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-right: 4px;
+}
+
+.admin-sidebar-nav::-webkit-scrollbar {
+  width: 5px;
+}
+
+.admin-sidebar-nav::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 4px;
+}
+
+.admin-sidebar-nav::-webkit-scrollbar-thumb {
+  background: var(--admin-gold);
+  border-radius: 4px;
 }
 
 .admin-sidebar-head {
@@ -200,7 +227,9 @@ label {
 
 .admin-sidebar-footer {
   margin-top: auto;
-  padding: 8px 2px;
+  padding-top: 10px;
+  border-top: 1px solid var(--admin-border);
+  flex-shrink: 0;
 }
 
 .admin-shell-content {
